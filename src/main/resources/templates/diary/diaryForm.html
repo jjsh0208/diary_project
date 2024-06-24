@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기 쓰기</title>
+    <link rel="stylesheet" th:href="@{/css/diary/form.css}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">일기 쓰기</h1>
+        <p class="subtitle">오늘 하루와 느낀 점을 반성해 보세요.</p>
+    </div>
+    <form class="form" th:action="@{/diary/write}" method="post">
+        <div class="form-group">
+            <label for="title" class="label">제목</label>
+            <input id="title" name="title" class="input" type="text" placeholder="멋진 하루" required>
+        </div>
+        <div class="form-group">
+            <label for="date" class="label">날짜</label>
+            <input id="date" name="date" class="input" type="date" required>
+        </div>
+        <div class="form-group">
+            <label for="content" class="label">내용</label>
+            <textarea id="content" name="content" class="textarea" placeholder="여기에 일기를 작성하세요..." required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="mood" class="label">오늘의 노래 추천</label>
+            <button type="button" id="mood" class="mood-button">노래 선택</button>
+        </div>
+        <button type="submit" class="submit-button">저장하기</button>
+    </form>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+        const dd = String(today.getDate()).padStart(2, '0');
+
+        const todayString = `${yyyy}-${mm}-${dd}`;
+        dateInput.value = todayString;
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
