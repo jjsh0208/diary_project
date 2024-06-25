@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -13,11 +14,17 @@ import java.util.Date;
 @Data
 public class DiaryForm {
 
+    private Long writer;
+
     @NotEmpty(message = "제목을 작성해주세요!")
     private String title;
 
     @NotEmpty(message = "일기를 작성해주세요!")
     private String content;
+
+    private MultipartFile  img_path;
+
+    private String Music_url;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;

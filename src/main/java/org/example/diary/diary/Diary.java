@@ -12,17 +12,24 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 public class Diary {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private Long writer;
 
     @Column(length = 50)
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column
+    private String img_path;
+
+    @Column
+    private String music_url;
 
     @Column
     private Date date;

@@ -10,10 +10,12 @@ import java.util.Date;
 public class DiaryService {
     private final DiaryRepository diaryRepository;
 
-    public void create(String title, String content , Date date){
+    public void create(Long writer,String title, String content ,String imgPath,String music_url, Date date){
         Diary diary = Diary.builder()
                 .title(title)
                 .content(content)
+                .img_path(imgPath)
+                .music_url(music_url)
                 .date(date)
                 .build();
         diaryRepository.save(diary);
