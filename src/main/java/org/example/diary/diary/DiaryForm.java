@@ -22,7 +22,7 @@ public class DiaryForm {
     @NotEmpty(message = "일기를 작성해주세요!")
     private String content;
 
-    private MultipartFile  img_path;
+    private MultipartFile  imgFile;
 
     private String Music_url;
 

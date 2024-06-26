@@ -1,14 +1,16 @@
 package org.example.diary.diary;
 
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+
 import java.io.IOException;
 
 
@@ -19,8 +21,6 @@ public class DiaryController {
 
     private final DiaryService diaryService;
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
 
     @GetMapping("/write")
     public String diaryCreate(DiaryForm diaryForm){
@@ -34,35 +34,23 @@ public class DiaryController {
         }
 
         // 파일 업로드 처리
-        MultipartFile file = diaryForm.getImg_path();
+        MultipartFile file = diaryForm.getImgFile();
 
-
-        if (file != null && !file.isEmpty()) {
-            try {
-                // 업로드 디렉토리가 존재하지 않으면 생성
-                File uploadDirFile = new File(uploadDir);
-                if (!uploadDirFile.exists()) {
-                    uploadDirFile.mkdirs();
-                }
-
-                String filePath = uploadDirFile.getAbsolutePath() + File.separator + file.getOriginalFilename();
-                file.transferTo(new File(filePath));
-                diaryService.create(diaryForm.getWriter(), diaryForm.getTitle(),
-                        diaryForm.getContent(),filePath , diaryForm.getMusic_url(), diaryForm.getDate());
-
-                return "redirect:/diary/write";
-            } catch (IOException e) {
-                bindingResult.rejectValue("file", "fileUploadError", "파일 업로드에 실패했습니다.");
-                e.printStackTrace(); // 에러 로그 출력
-                return "diary/diaryForm";
-            }
+        try{
+            diaryService.diaryCreate(diaryForm.getWriter(),diaryForm.getTitle(),diaryForm.getContent(),
+                    file,diaryForm.getMusic_url(),diaryForm.getDate());
+        }catch (IOException e){
+            e.printStackTrace();
+            return "diary/diaryForm";
         }
 
-        diaryService.create(diaryForm.getWriter(), diaryForm.getTitle(),
-                diaryForm.getContent(), null,diaryForm.getMusic_url(), diaryForm.getDate());
-
-
-
         return "redirect:/diary/write";
+    }
+
+    @GetMapping(value = "/show/{id}")
+    public String read(Model model,@PathVariable("id") Long id){
+        Diary diary = diaryService.getDiary(id);
+        model.addAttribute(diary);
+        return  "diary/diaryShow";
     }
 }

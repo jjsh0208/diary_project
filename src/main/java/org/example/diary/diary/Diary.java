@@ -26,7 +26,7 @@ public class Diary {
     private String content;
 
     @Column
-    private String img_path;
+    private String imgFile;
 
     @Column
     private String music_url;
