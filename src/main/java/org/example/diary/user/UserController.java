@@ -16,6 +16,7 @@ public class UserController {
         return ResponseEntity.ok("success");
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<String> longUser(@RequestBody UserLoginDTO userLoginDto) {
         return userService.login(userLoginDto);
