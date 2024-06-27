@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class UserDTO {
+public class UserRegisterDTO {
     private String email;
 
     private String password;
@@ -15,7 +15,6 @@ public class UserDTO {
     private String phone;
 
     private String name;
-
 
     private Date birthDate;
 
