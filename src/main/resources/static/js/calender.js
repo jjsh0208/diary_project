@@ -125,5 +125,4 @@ function handleWeek(opt) {
 
 document.getElementById("year").innerHTML = year + " / ";
 document.getElementById("month").innerHTML = month;
-document.getElementById("this-day").innerHTML = thisDay;
 document.getElementById("date").innerHTML = weekDic2[date];

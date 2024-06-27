@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -21,6 +22,13 @@ public class DiaryController {
 
     private final DiaryService diaryService;
 
+    @GetMapping("/list")
+    public String diaryList(Model model){
+        List<Diary> diaries = diaryService.getList();
+
+        model.addAttribute("diaryList" , diaries);
+        return "index";
+    }
 
     @GetMapping("/write")
     public String diaryCreate(DiaryForm diaryForm){
@@ -44,7 +52,7 @@ public class DiaryController {
             return "diary/diaryForm";
         }
 
-        return "redirect:/diary/write";
+        return "redirect:/diary/list";
     }
 
     @GetMapping(value = "/show/{id}")

@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -66,5 +68,9 @@ public class DiaryService {
         }else{
             throw new DataNotFoundException("Diary Not Fount");
         }
+    }
+
+    public List<Diary> getList() {
+        return diaryRepository.findAll();
     }
 }

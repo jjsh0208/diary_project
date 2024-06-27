@@ -1,160 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Calendar with Vanilla JS</title>
-    <style>
-        /*html,*/
-        /*body {*/
-        /*    margin: 0px;*/
-        /*    padding: 0px;*/
-        /*    height: 100%;*/
-        /*    overflow: hidden;*/
-        /*}*/
-        #back {
-            width: 100%;
-            height: 100%;
-            max-height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            max-width: 100%;
-            background-color: black;
-        }
-
-        #back .imgwrap {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        #back .imgview {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            -webkit-transition: opacity 1s ease-in-out;
-            -moz-transition: opacity 1s ease-in-out;
-            -o-transition: opacity 1s ease-in-out;
-            transition: opacity 1s ease-in-out;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-            filter: alpha(opacity=0);
-            opacity: 0;
-        }
-
-        #back .imgview.opaque {
-            opacity: 1;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-            filter: alpha(opacity=1);
-
-        }
-
-        #container {
-            width: 480px;
-            color: white;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            margin-left: 3rem;
-            float: left;
-
-            /* background-color: #0093e9;
-            background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%); */
-        }
-        #weekDic {
-            font-size: 0.8rem;
-        }
-        .day {
-            width: 11%;
-            height: 80px;
-            display: inline-block;
-            padding: 5px;
-        }
-        .today {
-            border: 1px solid white;
-        }
-        .dic {
-            display: inline-block;
-            width: 11%;
-            padding: 5px;
-        }
-        #controller {
-            color: white;
-            margin-top: 15rem;
-
-        }
-        #controller h3 {
-            margin-bottom: -10px;
-        }
-        #controller .btn div{
-            display: inline;
-        }
-        #controller .btn img {
-            width: 2rem;
-            height: 2rem;
-            filter: invert(85%);
-            transition: 0.3s;
-        }
-        #controller .btn img:hover{
-            transform:scale(1.1);
-            filter: invert(100%);
-        }
-        #year {
-            font-size: 1.7rem;
-            display: inline;
-        }
-        #month {
-            font-size: 2rem;
-            display: inline;
-        }
-        #this-day {
-            font-size: 6rem;
-        }
-        #date {
-            font-size: 3rem;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Diary</title>
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
-<div id="container">
-    <h2>
-        username
-    </h2>
-    <div style="display: inline-block;" onclick="handleWeek(-1)"><img src="./img/previous.png"/></div>
-    <div id="year"></div>
-    <div id="month"></div>
-    <div style="display: inline-block; margin-left: 2rem;" onclick="handleWeek(1)"><img src="./img/next.png"/></div>
-    <div id="weekDic"></div>
-    <div id="Calendar"></div>
-
-</div>
-<div id="back">
-    <div class="imgwrap">
-        <div class="imgview opaque" id="1"></div>
-        <div class="imgview" id="2"></div>
-        <div class="imgview" id="3"></div>
-        <div class="imgview" id="4"></div>
-        <div class="imgview" id="5"></div>
-        <div class="imgview" id="6"></div>
-        <div class="imgview" id="7"></div>
-        <div class="imgview" id="8"></div>
-        <div class="imgview" id="9"></div>
-        <div class="imgview" id="10"></div>
-        <div class="imgview" id="11"></div>
-        <div class="imgview" id="12"></div>
-        <div class="imgview" id="13"></div>
+<div class="container-right">
+    <div class="header">
+        <h1 class="title">My Diary</h1>
+        <button class="btn-new-entry">New Entry</button>
+    </div>
+    <div class="entries">
+        <div class="entry">
+            <div class="entry-header">
+                <h3 class="entry-title">A Sunny Day at the Beach</h3>
+                <p class="entry-date">June 15, 2024</p>
+            </div>
+            <div class="entry-content">
+                <p>
+                    Today was the perfect day to visit the beach. The sun was shining, the waves were gentle, and the sand was
+                    warm between my toes. I spent the afternoon swimming, building sandcastles, and reading a book under the
+                    shade of a palm tree. It was exactly the relaxing day I needed.
+                </p>
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-header">
+                <h3 class="entry-title">Exploring the City</h3>
+                <p class="entry-date">June 10, 2024</p>
+            </div>
+            <div class="entry-content">
+                <p>
+                    I decided to be a tourist in my own city today. I started my adventure at the local museum, where I
+                    learned about the history and culture of the area. After that, I wandered through the bustling streets,
+                    popping into quirky shops and trying new foods at the local cafes. It was a day full of discovery and
+                    excitement.
+                </p>
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-header">
+                <h3 class="entry-title">Rainy Day Reflections</h3>
+                <p class="entry-date">June 5, 2024</p>
+            </div>
+            <div class="entry-content">
+                <p>
+                    The rain was pouring down today, but instead of feeling gloomy, I found myself feeling cozy and
+                    introspective. I spent the day curled up on the couch, sipping hot tea and journaling about my thoughts
+                    and feelings. It was a much-needed moment of calm and self-reflection.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
-
-<script>
-
-
-</script>
 </body>
 </html>
