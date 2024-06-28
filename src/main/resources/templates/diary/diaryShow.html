@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"git push -u origin WriteAndReadDiary content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
 </head>
@@ -25,13 +25,9 @@
     </div>
     <div class="entries">
         <div class="entry">
-            <img th:src="${diary.imgFile}" alt="Today's Entry" class="entry-image" />
-            <div class="entry-title" th:text="${diary.title}"></div>
             <div class="entry-content">
-                <p th:utext="${diary.content}"></p>
             </div>
             <div class="entry-audio">
-                <audio controls th:src="${diary.music_url}"></audio>
             </div>
         </div>
         <div class="entry">
@@ -42,7 +38,6 @@
                 <p>
                     I'm so glad to hear that you had a wonderful day and were able to appreciate the beauty around you. It's
                     the little things in life that often bring the most joy, isn't it?
-
                     I'm grateful that we have this special diary exchange to share our thoughts and experiences with each
                     other. It's a wonderful way for us to stay connected and support one another.
                 </p>
