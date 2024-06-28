@@ -1,14 +1,13 @@
 package org.example.diary.diary;
 
 import lombok.RequiredArgsConstructor;
-import org.example.diary.excetion.DataNotFoundException;
+import org.example.diary.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
