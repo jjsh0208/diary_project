@@ -1,0 +1,132 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+#container-left {
+    width: 33%; /* 변경된 부분 */
+    color: white;
+    font-size: 0.9rem;
+    padding-top: 2rem;
+    padding-left : 4rem;
+
+}
+
+#weekDic {
+    font-size: 0.8rem;
+}
+
+.day {
+    width: 11%;
+    height: 80px;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid black; /* 테두리 선 추가 */
+    border-radius: 10px; /* 둥근 테두리 적용 */
+}
+
+.today {
+    border: 1px solid white;
+    background-color: white;
+    color: black;
+}
+
+.dic {
+    display: inline-block;
+    width: 11%;
+    padding: 5px;
+}
+
+#controller {
+    color: white;
+    margin-top: 15rem;
+}
+
+#controller h3 {
+    margin-bottom: -10px;
+}
+
+#controller .btn div {
+    display: inline;
+}
+
+#controller .btn img {
+    width: 2rem;
+    height: 2rem;
+    filter: invert(85%);
+    transition: 0.3s;
+}
+
+#controller .btn img:hover {
+    transform: scale(1.1);
+    filter: invert(100%);
+}
+
+#year {
+    font-size: 1.7rem;
+    display: inline;
+}
+
+#month {
+    font-size: 2rem;
+    display: inline;
+}
+
+#this-day {
+    font-size: 6rem;
+}
+
+#date {
+    font-size: 3rem;
+}
+
+#back {
+    width: 33%;
+    height: 100%;
+    max-height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    max-width: 100%;
+    background-color: black;
+}
+
+#back .imgwrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#back .imgview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+#back .imgview.opaque {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=1);
+}
