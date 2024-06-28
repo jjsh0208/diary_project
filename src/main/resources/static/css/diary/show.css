@@ -5,6 +5,7 @@
     width: 100%;
     max-width: 768px;
     background-color: #f0f0f0;
+    margin: 20px auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 24px;
@@ -64,26 +65,58 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 16px; /* .entry 아래 여백 추가 */
 }
 
 .entry-image {
     border-radius: 8px;
     object-fit: cover;
     aspect-ratio: 3 / 2;
+    width: 100%; /* 부모 요소의 너비에 맞춥니다 */
+    height: 200px; /* 고정된 높이를 설정합니다 */
 }
 
 .entry-title {
     color: #4b4b4b;
     font-weight: 500;
+
 }
 
 .entry-content {
     color: #6b6b6b;
     font-size: 14px;
     line-height: 1.5;
+    white-space: pre-line; /* 줄바꿈을 적용합니다 */
+    overflow-y: auto;
+    max-height: 400px  ; /* 고정된 최대 높이를 설정합니다 */
+    padding: 10px; /* 가독성을 위해 패딩 추가 */
+    box-sizing: border-box; /* 패딩을 요소의 전체 높이에 포함 */
 }
 
+/* 스크롤바 설정*/
+.entry-content::-webkit-scrollbar{
+    width: 10px;
+}
+
+/* 스크롤바 막대 설정*/
+.entry-content::-webkit-scrollbar-thumb{
+    background-color: rgb(120, 120, 120);
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.entry-content::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
+}
+
+.entry-content p {
+    margin: 0; /* <p> 태그 사이의 기본 마진을 제거합니다 */
+}
+
+
 .entry-audio {
+    margin-top: auto; /* .entry-audio를 .entry 요소의 맨 아래에 배치 */
 }
 
 .entry-audio audio {

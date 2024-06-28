@@ -1,4 +1,4 @@
-package org.example.diary.excetion;
+package org.example.diary.exception;
 
 
 import org.springframework.http.HttpStatus;
