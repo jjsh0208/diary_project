@@ -1,7 +1,6 @@
 package org.example.diary.diary;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Controller;
@@ -10,10 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.io.IOException;
 import java.util.List;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -31,12 +28,12 @@ public class DiaryController {
     }
 
     @GetMapping("/write")
-    public String diaryCreate(DiaryForm diaryForm){
+    public String diaryCreate(DiaryFormDTO diaryForm){
         return "diary/diaryForm";
     }
 
     @PostMapping("/write")
-    public String diaryCreate(@Valid DiaryForm diaryForm, BindingResult bindingResult){
+    public String diaryCreate(@Valid DiaryFormDTO diaryForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "diary/diaryForm";
         }
@@ -56,9 +53,11 @@ public class DiaryController {
     }
 
     @GetMapping(value = "/show/{id}")
-    public String read(Model model,@PathVariable("id") Long id){
-        Diary diary = diaryService.getDiary(id);
-        model.addAttribute(diary);
+    public String show(Model model,@PathVariable("id") Long id){
+        Diary diary1 = diaryService.getDiary(id);
+        Diary diary2 = diaryService.getPartnerDiary(id,diary1.getDate());
+        model.addAttribute(diary1);
+        model.addAttribute(diary2);
         return  "diary/diaryShow";
     }
 }

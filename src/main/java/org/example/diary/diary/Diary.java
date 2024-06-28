@@ -19,10 +19,10 @@ public class Diary {
     @Column
     private Long writer;
 
-    @Column(length = 50)
+    @Column(length = 50 , nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(length = 500 , nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @Column
@@ -33,7 +33,5 @@ public class Diary {
 
     @Column
     private Date date;
-
-
 
 }

@@ -22,8 +22,8 @@ public class DiaryService {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-
-    public void diaryCreate(Long writer, String title, String content , MultipartFile imgFile, String music_url, Date date) throws IOException{
+    public void diaryCreate(Long writer, String title, String content , MultipartFile imgFile,
+                            String music_url, Date date) throws IOException{
 
         String filePath = null;
 
@@ -36,10 +36,6 @@ public class DiaryService {
 
             filePath = uploadDirFile.getAbsolutePath() + File.separator + imgFile.getOriginalFilename();
 
-            System.out.println("1 : " +uploadDirFile.getAbsolutePath());
-            System.out.println("2 : "+File.separator);
-            System.out.println("3 : "+imgFile.getOriginalFilename());
-
             imgFile.transferTo(new File(filePath));
 
             filePath = filePath.substring(filePath.lastIndexOf("\\uploads\\"));
@@ -48,10 +44,10 @@ public class DiaryService {
         create(writer,title,content,filePath,music_url,date);
     }
 
-
     private void create(Long writer,String title, String content ,String imgPath,String music_url, Date date){
 
         Diary diary = Diary.builder()
+                .writer(writer)
                 .title(title)
                 .content(content)
                 .imgFile(imgPath)
@@ -70,7 +66,19 @@ public class DiaryService {
         }
     }
 
+    public Diary getPartnerDiary(Long id,Date date) {
+         Optional<Diary> diary = diaryRepository.findByIdAndDate(id,date);
+         if (diary.isPresent()){
+             return diary.get();
+         }else{
+             throw  new DataNotFoundException("partnerDiary Not Fount");
+         }
+    }
+
+
     public List<Diary> getList() {
         return diaryRepository.findAll();
     }
+
+
 }

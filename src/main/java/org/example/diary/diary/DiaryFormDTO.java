@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Data
-public class DiaryForm {
+public class DiaryFormDTO {
 
     private Long writer;
 
@@ -22,11 +22,10 @@ public class DiaryForm {
     @NotEmpty(message = "일기를 작성해주세요!")
     private String content;
 
-    private MultipartFile  imgFile;
+    private MultipartFile imgFile;
 
     private String Music_url;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-
 }

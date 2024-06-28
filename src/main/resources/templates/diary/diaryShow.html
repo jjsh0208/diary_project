@@ -29,8 +29,6 @@
             <div class="entry-title" th:text="${diary.title}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
-                <p>Until next time,</p>
-                <p>유저명</p>
             </div>
             <div class="entry-audio">
                 <audio controls th:src="${diary.music_url}"></audio>
