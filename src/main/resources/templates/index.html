@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Calendar with Vanilla JS</title>
+</head>
+<body>
+<div class="container">
+    <div id="container-left">
+        <h2 class="user-name">username</h2>
+        <div class="year-month">
+            <div style="display: inline-block;margin-right: 2rem;" onclick="handleWeek(-1)"><ion-icon name="chevron-back-outline"></ion-icon></div>
+            <div id="year"></div>
+            <div id="month"></div>
+            <div style="display: inline-block;margin-left: 2rem; " onclick="handleWeek(1)"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+        </div>
+        <div id="weekDic"></div>
+        <div id="Calendar"></div>
+    </div>
+    <div id="back">
+        <div class="imgwrap">
+            <div class="imgview opaque" id="1"></div>
+            <div class="imgview" id="2"></div>
+            <div class="imgview" id="3"></div>
+            <div class="imgview" id="4"></div>
+            <div class="imgview" id="5"></div>
+            <div class="imgview" id="6"></div>
+            <div class="imgview" id="7"></div>
+            <div class="imgview" id="8"></div>
+            <div class="imgview" id="9"></div>
+            <div class="imgview" id="10"></div>
+            <div class="imgview" id="11"></div>
+            <div class="imgview" id="12"></div>
+            <div class="imgview" id="13"></div>
+        </div>
+    </div>
+    <div class="container-right">
+        <div class="header">
+            <h1 class="title">My Diary</h1>
+
+            <button class="btn-new-entry"  onclick="location.href='/diary/write'" >New Entry</button>
+        </div>
+        <div class="entries">
+            <div class="entry" th:each="diary : ${diaryList} " th:onclick="'window.location.href=\'/diary/show/' + ${diary.id} + '\';'">
+                <div class="entry-header">
+                    <h3 class="entry-title" th:text="${diary.title}"></h3>
+                    <p class="entry-date" th:text="${#strings.substring(diary.date, 0, 10)}"></p>
+                </div>
+                <div class="entry-content">
+                    <p th:text="${diary.content.length() > 50 ? #strings.substring(diary.content, 0, 50) + '.....' : diary.content}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/calender.js}"></script>
+</body>
+</html>
