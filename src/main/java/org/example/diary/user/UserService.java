@@ -28,7 +28,7 @@ public class UserService {
             return ResponseEntity.notFound().build();
         } else{
             if(user.getPassword().equals(userLoginDto.getPassword())){
-                return ResponseEntity.ok("sucess");
+                return ResponseEntity.ok("success");
             }else{
                 return ResponseEntity.badRequest().build();
             }
