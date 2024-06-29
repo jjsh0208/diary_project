@@ -2,26 +2,25 @@ package org.example.diary.controller;
 
 import org.example.diary.service.YoutubeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
-@Repository
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/youtube")
 public class YoutubeController {
-
     private final YoutubeService youtubeService;
 
     @GetMapping
-    public ResponseEntity<String> searchVideo(@RequestParam String keyword) throws IOException {
-        // YoutubeService를 통해 동영상 검색한 결과를 받아옴
-        String result = youtubeService.searchVideo(keyword);
-        return ResponseEntity.ok(result);
-
+    public String searchVideo(@RequestParam String keyword, Model model) throws IOException {
+        HashMap<String, String> result = youtubeService.searchVideo(keyword);
+        if (result == null)
+            return "redirect:/index";
+        model.addAttribute("youtubeInfo", result);
+        return "index";
     }
 }
