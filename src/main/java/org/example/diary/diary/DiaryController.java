@@ -55,9 +55,8 @@ public class DiaryController {
     @GetMapping(value = "/show/{id}")
     public String show(Model model,@PathVariable("id") Long id){
         Diary diary1 = diaryService.getDiary(id);
-        Diary diary2 = diaryService.getPartnerDiary(id,diary1.getDate());
+        System.out.println(diary1.getImgFile());
         model.addAttribute(diary1);
-        model.addAttribute(diary2);
         return  "diary/diaryShow";
     }
 }

@@ -18,6 +18,13 @@
     margin-bottom: 16px;
 }
 
+.custom-icon{
+    width: auto;     /* or your desired value */
+    height: auto;    /* or your desired value */
+    contain: none;   /* or your desired value */
+    margin-top: 3px;
+}
+
 .user-info {
     display: flex;
     align-items: center;

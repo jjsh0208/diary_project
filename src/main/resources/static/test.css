@@ -1,73 +1,93 @@
-/* Resetting default margins and paddings */
-* {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Basic styles for the container */
-.container-right {
-    max-width: 800px;
-    margin: 0 auto;
+.container {
+    max-width: 600px; /* Adjust width to fit all inputs */
+    margin: 50px auto;
     padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Styles for the header section */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .title {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
+    margin: 0;
 }
 
-.btn-new-entry {
-    padding: 10px 20px;
-    font-size: 0.875rem;
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px; /* Adjust as necessary to fit all inputs in one line */
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
     font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: #3182ce;
+    margin-bottom: 5px;
+}
+
+input, select {
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.help-text {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.submit-button {
+    height: 40px;
+    background-color: #007bff;
     color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.btn-new-entry:hover {
-    background-color: #2c5282;
-}
-
-/* Styles for individual diary entries */
-.entries {
-    display: grid;
-    gap: 20px;
-}
-
-.entry {
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-    background-color: #edf2f7;
-    padding: 20px;
-}
-
-.entry-header {
-    margin-bottom: 10px;
-}
-
-.entry-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.entry-date {
-    font-size: 0.875rem;
-    color: #718096;
-}
-
-.entry-content {
-    line-height: 1.6;
+.submit-button:hover {
+    background-color: #0056b3;
 }
