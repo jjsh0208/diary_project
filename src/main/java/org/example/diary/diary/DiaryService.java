@@ -37,6 +37,7 @@ public class DiaryService {
 
             imgFile.transferTo(new File(filePath));
 
+
             String os = System.getProperty("os.name").toLowerCase();
             String separator = "";
 
@@ -49,7 +50,6 @@ public class DiaryService {
             if (!separator.isEmpty()) {
                 filePath = filePath.substring(filePath.lastIndexOf(separator));
             }
-
         }
 
         create(writer,title,content,filePath,music_url,date);
