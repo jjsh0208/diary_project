@@ -36,4 +36,8 @@ public class User {
 
     @Column(length = 4, nullable = false)
     private String mbti;
+
+    // 매칭 여부 추가
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int isMatched = 0;
 }
