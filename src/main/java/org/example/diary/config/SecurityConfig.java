@@ -3,10 +3,12 @@ package org.example.diary.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -28,7 +30,12 @@ public class SecurityConfig {
         //logoutSuccessUrl("/"): 로그아웃 성공 후 이동할 페이지입니다.
         //invalidateHttpSession(true): 로그아웃 시 세션을 무효화하여 사용자가 다시 로그인해야 합니다.
         http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/user/login", "/user/signup").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .anyRequest().authenticated()) // 다른 모든 요청은 인증 필요
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login") // 커스텀 로그인 페이지 설정
