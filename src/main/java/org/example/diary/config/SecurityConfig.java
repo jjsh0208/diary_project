@@ -20,6 +20,8 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http ) throws Exception {
+
+
         //authorizeHttpRequests: 웹 사이트에 들어오는 모든 요청을 허용하겠다는 뜻입니다.
         //requestMatchers(new AntPathRequestMatcher("/")).permitAll()**: 모든 URL (/**)에 대해 접근을 허용합니다.
         //formLogin: 로그인 페이지와 성공 후 이동할 페이지를 설정합니다.
