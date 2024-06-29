@@ -1,5 +1,6 @@
 package org.example.diary.user;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,20 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRegisterDTO userDto) {
+    public String register(@Valid UserRegisterDTO userDto) {
         userService.save(userDto);
-        return ResponseEntity.ok("success");
+        return "redirect:/user/login";
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> longUser(@RequestBody UserLoginDTO userLoginDto) {
-        return userService.login(userLoginDto);
+    public String login(@Valid UserLoginDTO userLoginDto) {
+        userService.login(userLoginDto); // <- 여기 안에서 계저 조회하고 이메일 비번 동일시 시큐리티콘텐트 객체 생성
+        return "/";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "user/login";
     }
 
     @GetMapping("/signup")
@@ -27,9 +34,4 @@ public class UserController {
         return "user/signup";
     }
 
-
-    @GetMapping("/login")
-    public String login(){
-        return "user/login";
-    }
 }

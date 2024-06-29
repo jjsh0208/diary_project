@@ -30,7 +30,7 @@ public class User {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column
     private Date birthDate;
 
     @Column(length = 1, nullable = false)
