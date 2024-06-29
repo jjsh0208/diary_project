@@ -36,8 +36,9 @@ public class DiaryService {
             filePath = uploadDirFile.getAbsolutePath() + File.separator + imgFile.getOriginalFilename();
 
             imgFile.transferTo(new File(filePath));
-
-            filePath = filePath.substring(filePath.lastIndexOf("\\uploads\\"));
+            System.out.println(filePath);
+            filePath = filePath.substring(filePath.lastIndexOf("/uploads/")); //맥은 이렇게 해줘야 함
+//            filePath = filePath.substring(filePath.lastIndexOf("\\uploads\\"));
         }
 
         create(writer,title,content,filePath,music_url,date);
