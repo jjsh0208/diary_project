@@ -36,16 +36,26 @@ public class DiaryService {
             filePath = uploadDirFile.getAbsolutePath() + File.separator + imgFile.getOriginalFilename();
 
             imgFile.transferTo(new File(filePath));
-            System.out.println(filePath);
-            filePath = filePath.substring(filePath.lastIndexOf("/uploads/")); //맥은 이렇게 해줘야 함
-//            filePath = filePath.substring(filePath.lastIndexOf("\\uploads\\"));
+
+
+            String os = System.getProperty("os.name").toLowerCase();
+            String separator = "";
+
+            if (os.contains("win")) {
+                separator = "\\uploads\\";
+            } else if (os.contains("mac")) {
+                separator = "/uploads/";
+            }
+
+            if (!separator.isEmpty()) {
+                filePath = filePath.substring(filePath.lastIndexOf(separator));
+            }
         }
 
         create(writer,title,content,filePath,music_url,date);
     }
 
     private void create(Long writer,String title, String content ,String imgPath,String music_url, Date date){
-
         Diary diary = Diary.builder()
                 .writer(writer)
                 .title(title)

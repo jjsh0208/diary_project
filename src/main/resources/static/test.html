@@ -1,59 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Diary</title>
+    <title>회원가입</title>
     <link rel="stylesheet" href="test.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-<div class="container-right">
+<div class="container">
     <div class="header">
-        <h1 class="title">My Diary</h1>
-        <button class="btn-new-entry">New Entry</button>
+        <h1 class="title">회원가입</h1>
+        <p class="subtitle">회원가입을 통해 더 많은 혜택을 누리세요.</p>
     </div>
-    <div class="entries">
-        <div class="entry">
-            <div class="entry-header">
-                <h3 class="entry-title">A Sunny Day at the Beach</h3>
-                <p class="entry-date">June 15, 2024</p>
+    <form class="form">
+        <div class="form-group">
+            <div class="input-group">
+                <label for="email"><ion-icon name="mail-outline"></ion-icon>  이메일</label>
+                <input id="email" type="email" placeholder="example@email.com" required>
+                <p class="help-text">회원가입 시 사용할 이메일 주소를 입력해주세요.</p>
             </div>
-            <div class="entry-content">
-                <p>
-                    Today was the perfect day to visit the beach. The sun was shining, the waves were gentle, and the sand was
-                    warm between my toes. I spent the afternoon swimming, building sandcastles, and reading a book under the
-                    shade of a palm tree. It was exactly the relaxing day I needed.
-                </p>
-            </div>
-        </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3 class="entry-title">Exploring the City</h3>
-                <p class="entry-date">June 10, 2024</p>
-            </div>
-            <div class="entry-content">
-                <p>
-                    I decided to be a tourist in my own city today. I started my adventure at the local museum, where I
-                    learned about the history and culture of the area. After that, I wandered through the bustling streets,
-                    popping into quirky shops and trying new foods at the local cafes. It was a day full of discovery and
-                    excitement.
-                </p>
+            <div class="input-group">
+                <label for="password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호</label>
+                <input id="password" type="password" required>
+                <p class="help-text">안전한 비밀번호를 설정해주세요.</p>
             </div>
         </div>
-        <div class="entry">
-            <div class="entry-header">
-                <h3 class="entry-title">Rainy Day Reflections</h3>
-                <p class="entry-date">June 5, 2024</p>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="confirm-password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호 확인</label>
+                <input id="confirm-password" type="password" required>
+                <p class="help-text">비밀번호를 한 번 더 입력해주세요.</p>
             </div>
-            <div class="entry-content">
-                <p>
-                    The rain was pouring down today, but instead of feeling gloomy, I found myself feeling cozy and
-                    introspective. I spent the day curled up on the couch, sipping hot tea and journaling about my thoughts
-                    and feelings. It was a much-needed moment of calm and self-reflection.
-                </p>
+            <div class="input-group">
+                <label for="name"> <ion-icon name="person-outline"></ion-icon>  이름</label>
+                <input id="name" type="text" placeholder="홍길동" required>
+                <p class="help-text">실명으로 입력해주세요.</p>
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="phone"><ion-icon name="phone-portrait-outline"></ion-icon> 전화번호</label>
+                <input id="phone" type="tel" placeholder="010-1234-5678" required>
+                <p class="help-text">연락 가능한 전화번호를 입력해주세요.</p>
+            </div>
+            <div class="input-group">
+                <label for="gender"><ion-icon name="male-female-outline"></ion-icon> 성별</label>
+                <select id="gender" required>
+                    <option value="">선택해주세요</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                    <option value="other">기타</option>
+                </select>
+                <p class="help-text">성별을 선택해주세요.</p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="mbti"><ion-icon name="extension-puzzle-outline"></ion-icon>  MBTI</label>
+            <select id="mbti" required>
+                <option value="">선택해주세요</option>
+                <option value="infp">INFP</option>
+                <option value="enfp">ENFP</option>
+                <option value="infj">INFJ</option>
+                <option value="enfj">ENFJ</option>
+                <option value="intj">INTJ</option>
+                <option value="entj">ENTJ</option>
+                <option value="intp">INTP</option>
+                <option value="entp">ENTP</option>
+                <option value="isfp">ISFP</option>
+                <option value="esfp">ESFP</option>
+                <option value="isfj">ISFJ</option>
+                <option value="esfj">ESFJ</option>
+                <option value="istp">ISTP</option>
+                <option value="estp">ESTP</option>
+                <option value="istj">ISTJ</option>
+                <option value="estj">ESTJ</option>
+            </select>
+            <p class="help-text">MBTI 유형을 선택해주세요.</p>
+        </div>
+        <button type="submit" class="submit-button">회원가입</button>
+    </form>
 </div>
 </body>
 </html>
