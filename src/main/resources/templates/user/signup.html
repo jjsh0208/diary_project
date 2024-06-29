@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" href="/static/css/user/signup.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" th:href="@{/css/user/signup.css}">
+    <script type="module" th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'"></script>
+    <script nomodule th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'"></script>
 </head>
 <body>
 <div class="container">
@@ -14,10 +14,10 @@
         <h1 class="title">회원가입</h1>
         <p class="subtitle">회원가입을 통해 더 많은 혜택을 누리세요.</p>
     </div>
-    <form class="form">
+    <form class="form" th:action="@{/user/signup}" method="post">
         <div class="form-group">
             <div class="input-group">
-                <label for="email"><ion-icon name="mail-outline"></ion-icon>  이메일</label>
+                <label for="email"><ion-icon name="mail-outline"></ion-icon> 이메일</label>
                 <input id="email" type="email" placeholder="example@email.com" required>
                 <p class="help-text">회원가입 시 사용할 이메일 주소를 입력해주세요.</p>
             </div>
@@ -34,7 +34,7 @@
                 <p class="help-text">비밀번호를 한 번 더 입력해주세요.</p>
             </div>
             <div class="input-group">
-                <label for="name"> <ion-icon name="person-outline"></ion-icon>  이름</label>
+                <label for="name"><ion-icon name="person-outline"></ion-icon> 이름</label>
                 <input id="name" type="text" placeholder="홍길동" required>
                 <p class="help-text">실명으로 입력해주세요.</p>
             </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="input-group">
-            <label for="mbti"><ion-icon name="extension-puzzle-outline"></ion-icon>  MBTI</label>
+            <label for="mbti"><ion-icon name="extension-puzzle-outline"></ion-icon> MBTI</label>
             <select id="mbti" required>
                 <option value="">선택해주세요</option>
                 <option value="infp">INFP</option>

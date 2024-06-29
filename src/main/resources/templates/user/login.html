@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" href="/static/css/user/signup.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" th:href="@{/css/user/signup.css}">
+    <script type="module" th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'"></script>
+    <script nomodule th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'"></script>
 </head>
 <body>
 <div class="container">
@@ -14,21 +14,21 @@
         <h1 class="title">로그인</h1>
         <p class="subtitle">회원가입을 통해 더 많은 혜택을 누리세요.</p>
     </div>
-    <form class="form">
+    <form class="form" th:action="@{/login}" method="post">
         <div class="form-group">
             <div class="input-group">
                 <label for="email"><ion-icon name="mail-outline"></ion-icon>  이메일</label>
-                <input id="email" type="email" placeholder="example@email.com" required>
+                <input id="email" type="email" placeholder="example@email.com" th:required="true">
                 <p class="help-text">이메일을 입력해주세요.</p>
             </div>
             <div class="input-group">
                 <label for="password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호</label>
-                <input id="password" type="password" required>
+                <input id="password" type="password" th:required="true">
                 <p class="help-text">비밀번호를 입력해주세요.</p>
             </div>
         </div>
         <button type="submit" class="submit-button">로그인</button>
-        <a href="signup.html">회원가입</a>
+        <a th:href="@{/user/signup}">회원가입</a>
     </form>
 </div>
 </body>
