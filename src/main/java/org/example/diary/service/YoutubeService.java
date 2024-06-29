@@ -52,9 +52,8 @@ public class YoutubeService {
                 String videoTitle = searchResult.getSnippet().getTitle();
                 if(videoId == null)
                     continue;
-                String videoUrl = "https://www.youtube.com/watch?v=" + videoId;
                 // 반환에 넣기
-                youtubeInfo.put(videoTitle, videoUrl);
+                youtubeInfo.put(videoTitle, videoId);
             }
             return youtubeInfo;
         }
