@@ -5,15 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+@RestController
 @RequestMapping("/user")
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public String register(@Valid UserRegisterDTO userDto) {
+    @PostMapping("/regist")
+    public String register(@RequestBody UserRegisterDTO userDto) {
         userService.save(userDto);
         return "redirect:/user/login";
     }
