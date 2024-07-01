@@ -39,7 +39,7 @@ public class SecurityConfig{
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login") // 커스텀 로그인 페이지 설정
                         .loginProcessingUrl("/user/login") // 사용자 이름과 비밀번호를 제출할 URL
-                        .defaultSuccessUrl("/") // 로그인 성공 후 리디렉션할 페이지
+                        .defaultSuccessUrl("/index") // 로그인 성공 후 리디렉션할 페이지
                         .permitAll()) // 모든 사용자가 로그인 페이지에 접근할 수 있도록 허용
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")) // 로그아웃할 때 사용할 URL
