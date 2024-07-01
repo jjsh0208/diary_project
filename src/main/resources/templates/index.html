@@ -18,7 +18,8 @@
         <div class="results" th:each="youtube : ${youtubeInfo}">
             <div class="result-item">
                 <h5 class="result-title" th:text="${youtube.key}"></h5>
-                <a href="#" class="btn-3d blue"  onclick="openVideo(this)" th:data-url="@{'https://www.youtube.com/embed/' + ${youtube.value}}" >Button</a>
+                <a href="#" class="btn-3d blue"  onclick="openVideo(this)" th:data-url="@{'https://www.youtube.com/embed/' + ${youtube.value}}">Play</a>
+                <button class="btn-3d blue" onclick="selectVideo(this)" th:data-url="@{'https://www.youtube.com/watch?v=' + ${youtube.value}}">Select</button>
             </div>
         </div>
         <div id="videoModal" class="modal">
@@ -30,5 +31,14 @@
     </div>
 </div>
 <script th:src="@{../js/modal.js}"></script>
+<script>
+    // 동영상을 select 했을시 함수
+    // 왜 modal.js로 넘기면 팝업 안뜨고 여기 있어야 팝업뜨지?
+    function selectVideo(element){
+        var url = element.getAttribute("data-url");
+        console.log("Selected Video URL: " + url);
+        alert("Selected Video URL: " + url);
+    }
+</script>
 </body>
 </html>
