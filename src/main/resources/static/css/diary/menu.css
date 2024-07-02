@@ -1,0 +1,52 @@
+.menu {
+    position: fixed;
+    left: -400px; /* 메뉴가 화면 밖에 숨겨져 있음 */
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #ebb783;
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 10;
+    padding-top: 60px; /* closeButton 상단 공간 확보 */
+    border-radius: 0 30px 30px 0;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); /* 오른쪽에 그림자 추가 */
+
+}
+
+.closeButton {
+    font-size: 30px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+}
+
+.toggleButton,
+.closeButton{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.menu a {
+
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background-color: #575757;
+}
+
+.toggle-button {
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    color: #333;
+}

@@ -2,8 +2,10 @@ package org.example.diary.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.diary.diary.Diary;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class User {
     @Column(length = 30, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 255, nullable = false)
     private String password;
 
     @Column(length = 13, nullable = false)
@@ -38,4 +40,7 @@ public class User {
 
     @Column(length = 4, nullable = false)
     private String mbti;
+
+    @OneToMany(mappedBy = "writer") // Diary 엔티티의 user 필드에 매핑됨
+    private List<Diary> diaries;
 }

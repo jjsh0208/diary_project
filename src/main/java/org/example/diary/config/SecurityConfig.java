@@ -16,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity //이 설정을 통해 웹 사이트의 모든 URL을 보안 처리하겠다는 것을 의미
-public class SecurityConfig {
+public class SecurityConfig{
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http ) throws Exception {
@@ -31,12 +31,8 @@ public class SecurityConfig {
         //invalidateHttpSession(true): 로그아웃 시 세션을 무효화하여 사용자가 다시 로그인해야 합니다.
         http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/signup").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/signup").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                        .anyRequest().authenticated()) // 다른 모든 요청은 인증 필요
+                        .requestMatchers("/user/**").permitAll() // /user/** 경로는 인증 없이 접근 가능
+                        .requestMatchers("/**").authenticated()) // 나머지 모든 경로는 인증이 필요함
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login") // 커스텀 로그인 페이지 설정
                         .loginProcessingUrl("/user/login") // 사용자 이름과 비밀번호를 제출할 URL
@@ -51,11 +47,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // 비밀번호 암호화
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 }
