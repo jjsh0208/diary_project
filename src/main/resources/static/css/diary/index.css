@@ -6,6 +6,7 @@
 
 /* Basic styles for the container */
 .container-right {
+    background-color: #ede2d1;
     width: 67%; /* 변경된 부분 */
     padding: 40px;
     max-height: 100vh; /* Set maximum height */
@@ -50,29 +51,30 @@
     font-weight: bold;
     border: none;
     border-radius: 5px;
-    background-color: black;
-    color: #fff;
+    background-color: rgb(206, 126, 97);
+    color: rgb(235, 224, 207);
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
+/* :hover 상태에서 배경색이 변하지 않도록 설정 */
 .btn-new-entry:hover {
-    background-color: #393939;
+    background-color: rgb(227, 186, 168); /* 원래 배경색으로 설정 */
 }
-
 /* Styles for individual diary entries */
 .entries {
     display: grid;
     gap: 20px;
+    padding: 10px;
 }
 
 /* Continuation of index.css */
 
 /* Styles for individual diary entries */
-.entry {
+.entry-list {
     border-radius: 10px;
-    border: 1px solid #e2e8f0;
-    background-color: white;
+    /*border: 2px solid rgb(144, 122, 86);*/
+    background-color: rgb(230, 212, 182);
     padding: 20px;
     cursor: pointer;
 }

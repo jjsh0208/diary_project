@@ -17,7 +17,7 @@ public class DiaryFormDTO {
     private Long writer;
 
     @NotEmpty(message = "제목을 작성해주세요!")
-    private String title;
+    private String subject;
 
     @NotEmpty(message = "일기를 작성해주세요!")
     private String content;

@@ -6,23 +6,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
     public void save(UserRegisterDTO userDto) {
-        System.out.println(userDto.getName());
-        System.out.println(userDto.getSex());
-        System.out.println(userDto.getMbti());
-        System.out.println(userDto.getPassword());
-        System.out.println(userDto.getPhone());
+        String rawPassword = userDto.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 
         User user = User.builder()
                 .email(userDto.getEmail())
@@ -31,22 +31,18 @@ public class UserService {
                 .birthDate(null)
                 .sex(userDto.getSex())
                 .mbti(userDto.getMbti())
-                .password(userDto.getPassword())
+                .password(encPassword)
                 .build();
         userRepository.save(user);
     }
 
-    public void login(UserLoginDTO userLoginDto) {
-        System.out.println("test");
-        User user = userRepository.findByEmail(userLoginDto.getEmail());
-        if (user == null) {
-            System.out.println("아이디없음");
-        } else{
-            if(user.getPassword().equals(userLoginDto.getPassword())){
-                System.out.println("성공");
-            }else{
-                System.out.println("실패");
-            }
+
+    public User getUser(String email){
+        User user = this.userRepository.findByEmail(email);
+        if (user != null){
+            return user;
         }
+        return null;
     }
+
 }
