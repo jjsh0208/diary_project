@@ -12,18 +12,21 @@
   <p>전화번호: <span th:text="${user.phone}">전화번호</span></p>
   <p>MBTI: <span th:text="${user.mbti}">MBTI</span></p>
 </div>
-<div th:if="${isMatched}">
+<div th:if="${user.isMatched == 1}">
   <h2>매칭된 유저 정보</h2>
   <p>이름: <span th:text="${matchedUser.name}">이름</span></p>
   <p>이메일: <span th:text="${matchedUser.email}">이메일</span></p>
   <p>전화번호: <span th:text="${matchedUser.phone}">전화번호</span></p>
   <p>MBTI: <span th:text="${matchedUser.mbti}">MBTI</span></p>
 </div>
-<div th:if="${isMatched}">
+<div th:if="${user.isMatched == 1}">
   <button th:onclick="|location.href='/matching/cancel-match?matchingHistoryId=${matchingHistoryId}&userId=${user.id}'|">매칭 취소</button>
 </div>
-<div th:unless="${isMatched}">
+<div th:if="${user.isMatched == 0}">
   <button th:onclick="|location.href='/matching/find-match?userId=${user.id}'|">매칭 신청</button>
+</div>
+<div>
+  <button th:onclick="|location.href='/mypage/${user.id}/myHistory'|">History</button>
 </div>
 </body>
 </html>

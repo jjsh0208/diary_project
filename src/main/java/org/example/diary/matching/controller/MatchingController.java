@@ -14,6 +14,7 @@ public class MatchingController {
 
     private final MatchingService matchingService;
 
+    // 매칭 신청
     @GetMapping("/find-match")
     public String findMatch(@RequestParam Long userId) {
         matchingService.findMatch(userId);
@@ -24,6 +25,6 @@ public class MatchingController {
     @GetMapping("/cancel-match")
     public String cancelMatch(@RequestParam Long matchingHistoryId, @RequestParam Long userId) {
         matchingService.cancelMatch(matchingHistoryId);
-        return "redirect:/mypage/index";
+        return "redirect:/mypage/" + userId;
     }
 }

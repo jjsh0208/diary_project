@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class DiaryService {
+public class  DiaryService {
 
     private final DiaryRepository diaryRepository;
 
