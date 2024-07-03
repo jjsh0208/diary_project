@@ -16,7 +16,7 @@ public class UserRegisterDTO {
 
     private String name;
 
-    private Date birthDate;
+    private String birthDate; //문자열로 받아와서 Date로 생성에 DB에 생성
 
     private String sex;
 

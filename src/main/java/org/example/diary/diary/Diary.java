@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.diary.user.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -16,7 +17,6 @@ public class Diary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @ManyToOne
     @JoinColumn(name = "user_id") // User 엔티티의 기본 키 컬럼명인 id로 수정
@@ -35,6 +35,6 @@ public class Diary {
     private String music_url;
 
     @Column
-    private Date date;
+    private LocalDate date;
 
 }
