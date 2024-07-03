@@ -22,4 +22,12 @@ public class HistoryService {
         return matchingHistoryRepository.findByUser1IdOrUser2Id(userId, userId);
     }
 
+    public Optional<MatchingHistory> findById(Long id) {
+        return matchingHistoryRepository.findById(id);
+    }
+
+    public List<Diary> findDiariesByMatchingHistoryId(Long matchingHistoryId) {
+        return diaryRepository.findByMatchingHistoryId(matchingHistoryId);
+    }
+
 }

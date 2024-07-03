@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.example.diary.user.User;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -21,6 +21,6 @@ public class MatchingHistory {
     @JoinColumn(name = "user2_id")
     private User user2;
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

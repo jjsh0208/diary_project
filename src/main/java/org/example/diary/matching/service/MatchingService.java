@@ -9,10 +9,13 @@ import org.example.diary.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+
 
 @Service
 @RequiredArgsConstructor
@@ -60,7 +63,7 @@ public class MatchingService {
         MatchingHistory matchingHistory = new MatchingHistory();
         matchingHistory.setUser1(user);
         matchingHistory.setUser2(matchedUser);
-        matchingHistory.setStartDate(new Date());
+        matchingHistory.setStartDate(LocalDate.now());  // LocalDate.now() 사용
         matchingHistoryRepository.save(matchingHistory);
 
         return matchedUser;
@@ -88,7 +91,7 @@ public class MatchingService {
         userRepository.save(user2);
 
         // 매칭 종료 날짜 설정 및 저장
-        matchingHistory.setEndDate(new Date());
+        matchingHistory.setEndDate(LocalDate.now());  // LocalDate.now() 사용
         matchingHistoryRepository.save(matchingHistory);
     }
 

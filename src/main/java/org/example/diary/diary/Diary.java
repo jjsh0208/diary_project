@@ -2,6 +2,7 @@ package org.example.diary.diary;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.diary.matching.entity.MatchingHistory;
 
 import java.util.Date;
 
@@ -33,5 +34,9 @@ public class Diary {
 
     @Column
     private Date date;
+
+    @ManyToOne
+    @JoinColumn(name = "matching_history_id")
+    private MatchingHistory matchingHistory;
 
 }
