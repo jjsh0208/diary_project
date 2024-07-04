@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
+<!--    추가-->
     <link rel="stylesheet" th:href="@{/css/diary/music.css}">
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -33,9 +33,10 @@
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
                 <p>Until next time,</p>
+                <p>유저명</p>
             </div>
 
-            <!--추가-->
+            <!--음악 재생 추가-->
             <div class="wrap_music">
                 <input type="hidden" id="musicUrl" th:value="${diary.music_url}">
                 <div class="music_inner">
@@ -87,7 +88,6 @@
             <div class="entry-audio">
                 <audio controls></audio>
             </div>
-
         </div>
     </div>
 </div>

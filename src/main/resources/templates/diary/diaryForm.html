@@ -36,10 +36,10 @@
 
     <div class="form-group">
       <input id="music_url" name="music_url" type="hidden" value="">
-      <input class="search-input" name="keyword" placeholder="Search..." type="text"/>
+      <input class="search-input" name="keyword" value="" placeholder="Search..." type="text"/>
       <button class="search-button" type="button" onclick="searchFunction()">Search</button>
-      <button type="submit" class="submit-button">저장하기</button>
     </div>
+    <button type="submit" class="submit-button">저장하기</button>
   </form>
 
 </div>
@@ -63,51 +63,55 @@
 </script>
 
 <script th:inline="javascript">
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const dateInput = document.getElementById('date');
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
-    const dd = String(today.getDate()).padStart(2, '0');
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const dateInput = document.getElementById('date');
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+      const dd = String(today.getDate()).padStart(2, '0');
 
-    const todayString = `${yyyy}-${mm}-${dd}`;
-    dateInput.value = todayString;
+      const todayString = `${yyyy}-${mm}-${dd}`;
+      dateInput.value = todayString;
 
-    // 파일 선택 시 파일 이름 표시
-    const fileInput = document.getElementById('file');
-    const uploadName = document.querySelector('.upload-name');
+      // 파일 선택 시 파일 이름 표시
+      const fileInput = document.getElementById('file');
+      const uploadName = document.querySelector('.upload-name');
 
-    fileInput.addEventListener('change', (event) => {
-      const fileName = event.target.files[0] ? event.target.files[0].name : '첨부파일';
-      uploadName.value = fileName;
+      fileInput.addEventListener('change', (event) => {
+        const fileName = event.target.files[0] ? event.target.files[0].name : '첨부파일';
+        uploadName.value = fileName;
+      });
+
+      // 추가
+      // localStorage에서 기존 내용을 복원
+      const savedTitle = localStorage.getItem('diaryTitle');
+      const savedDate = localStorage.getItem('diaryDate');
+      const savedContent = localStorage.getItem('diaryContent');
+      const videoLink = localStorage.getItem('selectedVideoLink');
+      const videoName = localStorage.getItem('selectedVideoName');
+
+      if (savedTitle) {
+        document.getElementById('title').value = savedTitle;
+      }
+      if (savedDate) {
+        document.getElementById('date').value = savedDate;
+      }
+      if (savedContent) {
+        document.getElementById('content').value = savedContent;
+      }
+      // 새로 가져온 유튜브 영상 링크 value에 저장
+      if (videoLink) {
+        const UploadName = document.querySelector('.search-input');
+        UploadName.value = videoName;
+        document.getElementById('music_url').value = videoLink;
+        localStorage.removeItem('selectedVideoLink'); // 사용 후 삭제
+      }
+
+      // 로컬 저장소 초기화
+      localStorage.removeItem('diaryTitle');
+      localStorage.removeItem('diaryDate');
+      localStorage.removeItem('diaryContent');
     });
-
-    // 추가
-    // localStorage에서 기존 내용을 복원
-    const savedTitle = localStorage.getItem('diaryTitle');
-    const savedDate = localStorage.getItem('diaryDate');
-    const savedContent = localStorage.getItem('diaryContent');
-    const videoLink = localStorage.getItem('selectedVideoLink');
-
-    if (savedTitle) {
-      document.getElementById('title').value = savedTitle;
-    }
-    if (savedDate) {
-      document.getElementById('date').value = savedDate;
-    }
-    if (savedContent) {
-      document.getElementById('content').value = savedContent;
-    }
-    if (videoLink) {
-      document.getElementById('music_url').value = videoLink;
-      localStorage.removeItem('selectedVideoLink'); // 사용 후 삭제
-    }
-
-    // 초기화
-    localStorage.removeItem('diaryTitle');
-    localStorage.removeItem('diaryDate');
-    localStorage.removeItem('diaryContent');
-  });
 </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 // 모달 요소를 가져옵니다
 var videoModal = document.getElementById("videoModal");
-var resultsModal = document.getElementById("resultsModal");
 
 // 동영상을 여는 함수입니다
 function openVideo(element) {
@@ -88,8 +87,9 @@ function Click_bth(message, element){
     customConfirm(message)
         .then(function(result){
             if (result) {
-                // localstorage에 선택된 비디오 링크 저장
+                // localstorage에 선택된 비디오 링크와 제목 저장
                 localStorage.setItem('selectedVideoLink', videoUrl);
+                localStorage.setItem('selectedVideoName', videoTitle);
                 // // 확인 버튼을 눌렀을 때 동작
                 window.location.href = '/diary/write';
             } else {
