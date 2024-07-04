@@ -12,6 +12,7 @@ a {
     text-align: center;
     transition: top .01s linear;
     text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    text-decoration-line: none;
 }
 
 .btn-3d:active {

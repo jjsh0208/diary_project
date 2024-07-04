@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
+    <link rel="stylesheet" th:href="@{/css/diary/music.css}">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="user-info">
+      <span class="user-avatar">
+        <img src="/placeholder-user.jpg" alt="User" />
+      </span>
+            <div class="user-name">John Doe</div>
+        </div>
+        <div class="title">Diary Exchange</div>
+        <div class="user-info">
+      <span class="user-avatar">
+        <img src="/placeholder-user.jpg" alt="User" />
+      </span>
+            <div class="user-name">Jane Ahn</div>
+        </div>
+    </div>
+    <div class="entries">
+        <div class="entry">
+            <img th:src="${diary.imgFile}" alt="Today's Entry" class="entry-image" />
+            <div class="entry-title" th:text="${diary.title}"></div>
+            <div class="entry-content">
+                <p th:utext="${diary.content}"></p>
+                <p>Until next time,</p>
+            </div>
+
+            <!--추가-->
+            <div class="wrap_music">
+                <input type="hidden" id="musicUrl" th:value="${diary.music_url}">
+                <div class="music_inner">
+                    <div class="music_control">
+                        <!-- 음표 아이콘 -->
+                        <i class="material-icons music_note">music_note</i>
+                        <!--            재생/일시정지 버튼-->
+                        <div class="play-pause">
+                            <i id="control-play" class="material-icons" title="재생">play_arrow</i>
+                            <!-- <i class="material-icons">pause</i> -->
+                        </div>
+                        <!--            프로그레스바-->
+                        <div class="music_progress">
+                            <div class="bar">
+                                <audio id="main-audio" src=""></audio>
+                            </div>
+                            <div class="timer">
+                                <span class="current">0:00</span>
+                                <span class="duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--        일단 얘가 none이어도 있어야 나중에 영상 재생이 됨-->
+                <!--        음악 재생 바에서 재생 위한 모달-->
+                <div id="musicPlayerModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeMusicPlayerModal()">&times;</span>
+                        <div id="musicPlayer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="entry">
+            <img src="/placeholder.svg" alt="Jane's Response" class="entry-image" />
+            <div class="entry-title">Jane's Response</div>
+            <div class="entry-content">
+                <p>Dear John,</p>
+                <p>
+                    I'm so glad to hear that you had a wonderful day and were able to appreciate the beauty around you. It's
+                    the little things in life that often bring the most joy, isn't it?
+
+                    I'm grateful that we have this special diary exchange to share our thoughts and experiences with each
+                    other. It's a wonderful way for us to stay connected and support one another.
+                </p>
+                <p>Jane</p>
+            </div>
+            <div class="entry-audio">
+                <audio controls></audio>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--추가-->
+<script th:src="@{/js/music.js}"></script>
+
+</body>
+</html>

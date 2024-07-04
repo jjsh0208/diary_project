@@ -1,4 +1,4 @@
-package org.example.diary.service;
+package org.example.diary.youtube;
 
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class YoutubeService {
