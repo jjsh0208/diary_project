@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,8 @@ public class YoutubeService {
                 if(videoId == null)
                     continue;
                 // 반환에 넣기
+                // 특수 문자 및 인코딩 문제 처리
+                videoTitle = new String(videoTitle.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
                 youtubeInfo.put(videoTitle, videoId);
             }
             return youtubeInfo;

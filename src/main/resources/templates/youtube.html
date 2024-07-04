@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube</title>
-    <link rel="stylesheet" th:href="@{../css/youtube/style.css}">
     <link rel="stylesheet" th:href="@{../css/youtube/modal.css}">
     <link rel="stylesheet" th:href="@{../css/youtube/button.css}">
 </head>
@@ -15,9 +14,9 @@
         <!--        youtube 페이지로 매핑되면 뜨는 3개 옵션창-->
         <div class="results" th:each="youtube : ${youtubeInfo}">
             <div class="result-item">
-                <h5 class="result-title" th:text="${youtube.key}"></h5>
-                <a href="#" class="btn-3d blue"  onclick="openVideo(this)" th:data-url="@{'https://www.youtube.com/embed/' + ${youtube.value}}">Play</a>
-                <button class="btn-3d blue" onclick="Click_bth(this, this)" th:data-url="@{'https://www.youtube.com/watch?v=' + ${youtube.value}}" th:data-key="${youtube.key}">Select</button>
+                <h5 class="result-title" th:text="${youtube.key}" th:attr="data-key=${youtube.key}"></h5>
+                <a href="#" class="btn-3d play"  onclick="openVideo(this)" th:data-url="@{'https://www.youtube.com/embed/' + ${youtube.value}}">Play</a>
+                <button class="btn-3d select" onclick="Click_bth(this, this)" th:data-url="@{'https://www.youtube.com/watch?v=' + ${youtube.value}}" th:data-key="${youtube.key}">Select</button>
             </div>
         </div>
 
@@ -31,6 +30,22 @@
     </div>
 </div>
 <script th:src="@{../js/modal.js}"></script>
-
+<script>
+    // 파싱 및 DOM 변환 함수
+    document.addEventListener('DOMContentLoaded', function() {
+        var elements = document.querySelectorAll('.result-title');
+        elements.forEach(function(element) {
+            var rawString = element.getAttribute('data-key');
+            var parser = new DOMParser();
+            var parsedHtml = parser.parseFromString(rawString, 'text/html');
+            var parsedElement = parsedHtml.body.firstChild;
+            if (parsedElement) {
+                element.textContent = parsedElement.textContent;
+            } else {
+                element.textContent = rawString; // 파싱 실패 시 원본 문자열 사용
+            }
+        });
+    });
+</script>
 </body>
 </html>

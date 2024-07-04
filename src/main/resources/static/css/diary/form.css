@@ -142,7 +142,7 @@ body {
 .search-button {
     height: 40px;
     border: none;
-    background-color: #007bff;
+    background-color: #d9bcff;
     color: #fff;
     padding: 0 16px;
     border-radius: 0 4px 4px 0;
@@ -150,5 +150,5 @@ body {
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #c296fd;
 }

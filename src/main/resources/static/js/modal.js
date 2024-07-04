@@ -82,14 +82,16 @@ function customConfirm(element, callback) {
 // 함수 호출
 function Click_bth(message, element){
     var videoUrl = element.getAttribute('data-url');
-    var videoTitle = element.getAttribute('data-key')
+    var videoTitle = element.getAttribute('data-key');
+    let parser = new DOMParser();
+    let newStr = parser.parseFromString(videoTitle, "text/html").body.innerText;
 
     customConfirm(message)
         .then(function(result){
             if (result) {
                 // localstorage에 선택된 비디오 링크와 제목 저장
                 localStorage.setItem('selectedVideoLink', videoUrl);
-                localStorage.setItem('selectedVideoName', videoTitle);
+                localStorage.setItem('selectedVideoName', newStr);
                 // // 확인 버튼을 눌렀을 때 동작
                 window.location.href = '/diary/write';
             } else {

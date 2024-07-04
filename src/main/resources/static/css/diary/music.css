@@ -1,9 +1,9 @@
 /* 공통 색상 변수 정의 */
 :root {
     --white: #ffffff;
-    --lightgray: #d3d3d3;
-    --gray: #808080;
-    --darkgray: #333333;
+    --lightgray: #E8E8E8FF;
+    --gray: #e6e6e6;
+    --darkgray: #808080;
 }
 
 .modal {
@@ -38,41 +38,36 @@
     text-decoration: none;
     cursor: pointer;
 }
-/* 음표 아이콘 스타일 */
-.music_note {
-    font-size: 28px;
-    color: var(--gray);
-    margin-right: 20px;
-}
 
 /* 프로그레스 바 컨테이너 스타일 */
 .music_progress {
     flex-grow: 1;
-    height: 10px;
-    background: var(--lightgray);
+    height: 5px;
+    background: var(--gray);
     cursor: pointer;
-    margin: 0 20px;
+    margin: 0 0px;
     position: relative;
+    border-radius: 30px;
 }
 
 /* 프로그레스 바 스타일 */
 .music_progress .bar {
-    width: 0%;
+    width: 100%;
     height: 100%;
     background: var(--darkgray);
-    border-radius: 5px;
+    border-radius: 30px;
 }
 
 /* 타이머 스타일 */
 .music_progress .timer {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 2px;
+    font-size: 12px;
 }
 
 .music_progress .timer span {
-    color: var(--gray);
-    font-size: 12px;
+    color: var(--darkgray);
 }
 
 /* 컨트롤 버튼 스타일 */
@@ -80,45 +75,44 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    /*margin-top: 10px;*/
 }
 
 /* 재생/일시정지 버튼 스타일 */
 .music_control .play-pause {
-    width: 54px;
-    height: 54px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--gray);
-    color: var(--white);
+    background: none;
+    color: var(--darkgray);
     cursor: pointer;
     position: relative;
     z-index: 1;
 }
 
 .music_control .play-pause i {
-    font-size: 28px;
+    font-size: 20px;
 }
 
 .wrap_music {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100%;
     user-select: none;
     width: 100%;
+    border-radius: 20px;
 }
 
 .music_inner {
-    width: 500px;
-    padding: 20px 30px;
+    width: 300px;
+    padding: 10px 15px;
     overflow: hidden;
     position: relative;
     border-radius: 15px;
-    background: var(--white);
-    box-shadow: 0 6px 15px var(--lightgray);
+    background: var(--lightgray);
 }
 
 /* 음표, 재생/일시정지 버튼과 프로그레스 바의 배치를 위해 수정 */

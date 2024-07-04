@@ -1,3 +1,4 @@
+/*youtube 페이지 video 모달이랑 confirm 박스 css*/
 .modal {
     display: none; /* 기본적으로 모달을 숨긴다. */
     position: fixed; /* 페이지 내에 위치를 고정시킨다.*/
@@ -37,11 +38,47 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
-    background-color: #6DA2D9;
-    border-radius: 6px;
+    background-color: #fbf5df;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
     text-align: center;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
-    font-size: 15px;
+}
+
+.confirm-box p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.confirm-box .confirm,
+.confirm-box .cancel {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-box .confirm {
+    background-color: #ffe697;
+    color: white;
+}
+
+.confirm-box .confirm:hover {
+    background-color: #FAC51FFf;
+}
+
+.confirm-box .cancel {
+    background-color: #91b6ed;
+    color: white;
+}
+
+.confirm-box .cancel:hover {
+    background-color: #5b9bfb;
 }
 
 .overlay {
@@ -50,6 +87,55 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 회색 반투명 배경 */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 998;
+}
+
+
+
+/*결과 보여줄때 사용되는 css*/
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e8e6df;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.results {
+    margin-top: 24px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.result-item {
+    background-color: #fdfaee;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.result-title {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+}
+
+.result-description {
+    color: #666;
+    margin: 0;
 }
