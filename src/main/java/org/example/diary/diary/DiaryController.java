@@ -1,5 +1,6 @@
 package org.example.diary.diary;
 
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.user.User;
 import org.example.diary.user.UserService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,18 +59,20 @@ public class DiaryController {
 
         model.addAttribute("user",user);
 
+
         return "diary/diaryForm";
     }
 
     @PostMapping("/write")
+
     public String diaryCreate(@Valid DiaryFormDTO diaryForm, BindingResult bindingResult){
+
         if (bindingResult.hasErrors()){
             return "diary/diaryForm";
         }
 
         // 파일 업로드 처리
         MultipartFile file = diaryForm.getImgFile();
-
         try {
             diaryService.diaryCreate(diaryForm.getSubject(),diaryForm.getContent(),
                     file,diaryForm.getMusic_url());
@@ -81,10 +85,12 @@ public class DiaryController {
     }
 
     @GetMapping(value = "/show/{id}")
+
     public String show(Model model,@PathVariable("id") Long id){
         Diary diary1 = diaryService.getDiary(id);
         System.out.println(diary1.getImgFile());
         model.addAttribute(diary1);
+
         return  "diary/diaryShow";
     }
 }

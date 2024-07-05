@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -40,10 +38,11 @@
                         <input type="file" id="file" name="imgFile" />
                     </div>
                 </div>
-                    <div class="form-group">
-                        <label for="mood" class="label"><ion-icon name="logo-youtube"></ion-icon>  오늘의 노래 추천</label>
-                        <button id="mood" class="mood-button">노래 찾기</button>
-                    </div>
+                      <div class="form-group">
+                          <input id="music_url" name="music_url" type="hidden" value="">
+                          <input class="search-input" name="keyword" value="" placeholder="Search..." type="text"/>
+                          <button class="search-button" type="button" onclick="searchFunction()">Search</button>
+                </div>
                 <div class="button-container">
                     <button type="button" class="cancel-button">Cancel</button>
                     <button type="submit" class="submit-button">Save Entry</button>
@@ -53,6 +52,76 @@
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const dateInput = document.getElementById('date');
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+      const dd = String(today.getDate()).padStart(2, '0');
+
+      const todayString = `${yyyy}-${mm}-${dd}`;
+      dateInput.value = todayString;
+
+      // 파일 선택 시 파일 이름 표시
+      const fileInput = document.getElementById('file');
+      const uploadName = document.querySelector('.upload-name');
+
+      fileInput.addEventListener('change', (event) => {
+        const fileName = event.target.files[0] ? event.target.files[0].name : '첨부파일';
+        uploadName.value = fileName;
+      });
+
+      // 추가
+      // localStorage에서 기존 내용을 복원
+      const savedTitle = localStorage.getItem('diaryTitle');
+      const savedDate = localStorage.getItem('diaryDate');
+      const savedContent = localStorage.getItem('diaryContent');
+      const videoLink = localStorage.getItem('selectedVideoLink');
+      const videoName = localStorage.getItem('selectedVideoName');
+
+      if (savedTitle) {
+        document.getElementById('title').value = savedTitle;
+      }
+      if (savedDate) {
+        document.getElementById('date').value = savedDate;
+      }
+      if (savedContent) {
+        document.getElementById('content').value = savedContent;
+      }
+      // 새로 가져온 유튜브 영상 링크 value에 저장
+      if (videoLink) {
+        const UploadName = document.querySelector('.search-input');
+        UploadName.value = videoName;
+        document.getElementById('music_url').value = videoLink;
+        localStorage.removeItem('selectedVideoLink'); // 사용 후 삭제
+      }
+
+      // 로컬 저장소 초기화
+      localStorage.removeItem('diaryTitle');
+      localStorage.removeItem('diaryDate');
+      localStorage.removeItem('diaryContent');
+    });
+</script>
+
+<!--추가-->
+<script>
+  function searchFunction() {
+    const keyword = document.querySelector('.search-input').value;
+    const title = document.getElementById('title').value;
+    const date = document.getElementById('date').value;
+    const content = document.getElementById('content').value;
+
+    // 기존 내용을 localStorage에 저장
+    localStorage.setItem('diaryTitle', title);
+    localStorage.setItem('diaryDate', date);
+    localStorage.setItem('diaryContent', content);
+
+    // 검색 쿼리를 포함하여 youtube.html로 이동합니다.
+    window.location.href = `/youtube?keyword=${encodeURIComponent(keyword)}`;
+  }
+</script>
+
 <script th:src="@{/js/calender/calender.js}"></script>
 <script th:src="@{/js/calender/menu.js}"></script>
 </body>
