@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diary Details</title>
+    <title>너의 하루</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 <div class="container">
@@ -26,17 +28,23 @@
     <div class="entries">
         <div th:each="diary : ${diaries}">
             <div class="entry">
-                <img th:src="@{${diary.imgFile}}" alt="Diary Entry" class="entry-image" />
-                <div class="entry-title" th:text="${diary.title}">Diary Title</div>
+                <div th:if="${diary.imgFile != null}">
+                    <img th:src="${diary.imgFile}" alt="user img" class="entry-image" />
+                </div>
+                <div th:unless="${diary.imgFile != null}">
+                    <img src="/uploads/default.png" alt="default img" class="entry-image" />
+                </div>
+                <div class="entry-title" th:text="${diary.subject}"></div>
                 <div class="entry-content">
-                    <p th:utext="${diary.content}">Diary Content</p>
+                    <p th:utext="${diary.content}"></p>
                 </div>
                 <div class="entry-audio">
-                    <audio controls th:src="@{${diary.music_url}}"></audio>
+                    <audio controls th:src="${diary.music_url}"></audio>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

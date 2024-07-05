@@ -1,23 +1,31 @@
 package org.example.diary.user;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @RequestMapping("/user")
+@Controller
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/regist")
-    public ResponseEntity<String> register(@RequestBody UserRegisterDTO userDto) {
+    @PostMapping("/register")
+    public String register(@Valid UserRegisterDTO userDto) {
         userService.save(userDto);
-        return ResponseEntity.ok("success");
+        return "redirect:/user/login";
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> longUser(@RequestBody UserLoginDTO userLoginDto) {
-        return userService.login(userLoginDto);
+    @GetMapping("/login")
+    public String login(){
+        return "user/login";
     }
+
+    @GetMapping("/signup")
+    public String signup(){
+        return "user/signup";
+    }
+
 }

@@ -1,13 +1,18 @@
 /* CSS */
+body{
+    background-color: #ede2d1;
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 768px;
-    background-color: #f0f0f0;
+    background-color: #d07f62;
     margin: 20px auto;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 13px rgba(0, 0, 0, 0.5);
     padding: 24px;
 }
 
@@ -16,6 +21,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+}
+
+.custom-icon{
+    width: auto;     /* or your desired value */
+    height: auto;    /* or your desired value */
+    contain: none;   /* or your desired value */
+    margin-top: 3px;
 }
 
 .user-info {
@@ -48,7 +60,7 @@
 .title {
     font-size: 24px;
     font-weight: bold;
-    color: #8c7ae6;
+    color: #ede2d1;
 }
 
 .entries {
