@@ -27,7 +27,7 @@
     </div>
     <div class="entries">
         <div class="entry">
-            <img th:src="${diary.imgFile != null ? diary.imgFile : 'src/main/uploads/default.png'}" alt="user img" class="entry-image" />
+            <img th:src="${diary.imgFile != null ? diary.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
             <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
