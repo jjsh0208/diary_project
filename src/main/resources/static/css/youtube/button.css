@@ -45,10 +45,10 @@ a {
 .btn-3d.play {
     background-color: #ffe697;
     border: 1px solid #ffe697;
-    box-shadow: 0 0 0 1px #ffe697 inset,
-    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 2px 0 0 rgba(0, 0, 0, 0.4),
-    0 4px 4px 1px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 0 0 1px #ffe697 inset,*/
+    /*0 0 0 2px rgba(255, 255, 255, 0.15) inset,*/
+    /*0 2px 0 0 rgba(0, 0, 0, 0.4),*/
+    /*0 4px 4px 1px rgba(0, 0, 0, 0.5);*/
 }
 
 .btn-3d.play:hover {
@@ -65,10 +65,10 @@ a {
 .btn-3d.select {
     background-color: #91b6ed;
     border: 1px solid #91b6ed;
-    box-shadow: 0 0 0 1px #91b6ed inset,
-    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 2px 0 0 rgba(0, 0, 0, 0.4),
-    0 4px 4px 1px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 0 0 1px #91b6ed inset,*/
+    /*0 0 0 2px rgba(255, 255, 255, 0.15) inset,*/
+    /*0 2px 0 0 rgba(0, 0, 0, 0.4),*/
+    /*0 4px 4px 1px rgba(0, 0, 0, 0.5);*/
 }
 
 .btn-3d.select:hover {

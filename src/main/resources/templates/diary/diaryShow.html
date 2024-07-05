@@ -36,7 +36,7 @@
             <div th:unless="${diary.imgFile != null}">
                 <img src="/uploads/default.png" alt="default img" class="entry-image" />
             </div>
-            <div class="entry-title" th:text="${diary.title}"></div>
+            <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
                 <p>Until next time,</p>

@@ -26,7 +26,7 @@ window.onclick = function(event) {
 function customConfirm(element, callback) {
     // 대화 상자를 HTML 요소로 생성(동적)
     var confirmBox = document.createElement('div');
-    confirmBox.setAttribute('class', 'confirm-box');
+    confirmBox.setAttribute('class', 'confirm-box dongle-regular');
     confirmBox.innerHTML = '<p>' + element.getAttribute('data-key') + '를 선택하시겠습니까?</p><button class="confirm">네</button><button class="cancel">아니요</button>';
 
     // HTML 요소를 body 요소의 하위 요소로 추가합니다.
