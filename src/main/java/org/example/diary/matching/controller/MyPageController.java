@@ -43,8 +43,6 @@ public class MyPageController {
                 model.addAttribute("matchedUser", matchingHistoryOptional.get()
                         .getUser1().equals(user) ? matchingHistoryOptional.get().getUser2() : matchingHistoryOptional.get().getUser1());
             }
-        } else {
-            return "error/404";
         }
         return "mypage/mypage";
     }

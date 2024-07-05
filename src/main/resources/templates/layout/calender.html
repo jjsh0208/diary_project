@@ -1,8 +1,13 @@
 <div id="container-left" th:fragment="calendarFragment">
     <div class="menu" id="menu">
         <span class="closeButton" id="closeButton">&#9776;</span>
-        <a href="#">지난일기 보기</a>
-        <a href="#">매칭 취소</a>
+        <a th:onclick="|location.href='/mypage/${user.id}/myHistory'|">지난일기 보기</a>
+        <div th:if="${user.isMatched == 1}">
+            <a th:href="|/matching/cancel-match?matchingHistoryId=${matchingHistoryId}&userId=${user.id}|">매칭 취소</a>
+        </div>
+        <div th:if="${user.isMatched == 0}">
+            <a th:href="|/matching/find-match?userId=${user.id}|">매칭 신청</a>
+        </div>
         <a href="/user/logout">로그아웃</a>
         <a href="#">test</a>
     </div>

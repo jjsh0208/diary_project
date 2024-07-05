@@ -1,5 +1,6 @@
 package org.example.diary.diary;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
@@ -23,6 +24,8 @@ public class  DiaryService {
     private final DiaryRepository diaryRepository;
 
     private final UserService userService;
+
+    private final HttpSession session;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
