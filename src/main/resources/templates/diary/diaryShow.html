@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>너의 하루</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
 <!--    추가-->
     <link rel="stylesheet" th:href="@{/css/diary/music.css}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="user-info">
       <span class="user-avatar">
-        <img src="/placeholder-user.jpg" alt="User" />
+          <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
       </span>
             <div class="user-name">John Doe</div>
         </div>
         <div class="title">Diary Exchange</div>
         <div class="user-info">
       <span class="user-avatar">
-        <img src="/placeholder-user.jpg" alt="User" />
+          <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
       </span>
             <div class="user-name">Jane Ahn</div>
         </div>
     </div>
     <div class="entries">
         <div class="entry">
-            <img th:src="${diary.imgFile}" alt="Today's Entry" class="entry-image" />
+           <div th:if="${diary.imgFile != null}">
+                <img th:src="${diary.imgFile}" alt="user img" class="entry-image" />
+            </div>
+            <div th:unless="${diary.imgFile != null}">
+                <img src="/uploads/default.png" alt="default img" class="entry-image" />
+            </div>
             <div class="entry-title" th:text="${diary.title}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
@@ -68,6 +75,7 @@
                         <div id="musicPlayer"></div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -91,8 +99,6 @@
         </div>
     </div>
 </div>
-<!--추가-->
 <script th:src="@{/js/music.js}"></script>
-
 </body>
 </html>

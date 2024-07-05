@@ -1,0 +1,39 @@
+<div id="container-left" th:fragment="calendarFragment">
+    <div class="menu" id="menu">
+        <span class="closeButton" id="closeButton">&#9776;</span>
+        <a href="#">지난일기 보기</a>
+        <a href="#">매칭 취소</a>
+        <a href="/user/logout">로그아웃</a>
+        <a href="#">test</a>
+    </div>
+    <div class="user-header">
+        <span class="toggleButton" id="toggleButton">&#9776;</span>
+        <h2 class="user-name" th:text="${user.name + ' 님'}"></h2>
+    </div>
+    <div class="year-month">
+        <div style="display: inline-block;margin-right: 2rem;" onclick="handleWeek(-1)"><ion-icon name="chevron-back-outline"></ion-icon></div>
+        <div id="year"></div>
+        <div id="month"></div>
+        <div style="display: inline-block;margin-left: 2rem;" onclick="handleWeek(1)"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+    </div>
+    <div id="weekDic"></div>
+    <div id="Calendar"></div>
+
+<div id="back">
+    <div class="imgwrap">
+        <div class="imgview opaque" id="1"></div>
+        <div class="imgview" id="2"></div>
+        <div class="imgview" id="3"></div>
+        <div class="imgview" id="4"></div>
+        <div class="imgview" id="5"></div>
+        <div class="imgview" id="6"></div>
+        <div class="imgview" id="7"></div>
+        <div class="imgview" id="8"></div>
+        <div class="imgview" id="9"></div>
+        <div class="imgview" id="10"></div>
+        <div class="imgview" id="11"></div>
+        <div class="imgview" id="12"></div>
+        <div class="imgview" id="13"></div>
+    </div>
+</div>
+</div>
