@@ -2,18 +2,20 @@ package org.example.diary.diary;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
 import org.example.diary.user.User;
 import org.example.diary.user.UserService;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +48,6 @@ public class  DiaryService {
 
             imgFile.transferTo(new File(filePath));
 
-
             String os = System.getProperty("os.name").toLowerCase();
             String separator = "";
 
@@ -66,6 +67,7 @@ public class  DiaryService {
 
     private void create(String subject, String content ,String imgPath,String music_url){
         User writer = userService.getUser(SecurityUtil.getCurrentUsername());
+        LocalDate date = LocalDate.now();
 
         Diary diary = Diary.builder()
                 .writer(writer)
@@ -73,11 +75,12 @@ public class  DiaryService {
                 .content(content)
                 .imgFile(imgPath)
                 .music_url(music_url)
-                .date(new Date())
+                .date(date)
                 .build();
 
         diaryRepository.save(diary);
     }
+
 
     public Diary getDiary(Long id) {
         Optional<Diary> diary = this.diaryRepository.findById(id);
@@ -88,19 +91,8 @@ public class  DiaryService {
         }
     }
 
-    public Diary getPartnerDiary(Long id,Date date) {
-         Optional<Diary> diary = diaryRepository.findByIdAndDate(id,date);
-         if (diary.isPresent()){
-             return diary.get();
-         }else{
-             throw  new DataNotFoundException("partnerDiary Not Fount");
-         }
-    }
-
-
     public List<Diary> getList() {
         return diaryRepository.findAll();
     }
-
 
 }

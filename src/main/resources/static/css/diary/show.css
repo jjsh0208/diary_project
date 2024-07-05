@@ -99,6 +99,7 @@ body{
     font-size: 14px;
     line-height: 1.5;
     white-space: pre-line; /* 줄바꿈을 적용합니다 */
+
     overflow-y: auto;
     max-height: 400px  ; /* 고정된 최대 높이를 설정합니다 */
     padding: 10px; /* 가독성을 위해 패딩 추가 */
@@ -120,6 +121,7 @@ body{
 /* 스크롤바 뒷 배경 설정*/
 .entry-content::-webkit-scrollbar-track{
     background-color: rgba(0,0,0,0);
+
 }
 
 .entry-content p {

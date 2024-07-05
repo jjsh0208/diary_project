@@ -6,6 +6,7 @@ import lombok.*;
 import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.user.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,7 +20,6 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id") // User 엔티티의 기본 키 컬럼명인 id로 수정
     private User writer;
@@ -28,6 +28,7 @@ public class Diary {
     private String subject;
 
     @Column(length = 500 , nullable = false, columnDefinition = "TEXT")
+
     private String content;
 
     @Column
@@ -37,7 +38,7 @@ public class Diary {
     private String music_url;
 
     @Column
-    private Date date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "matching_history_id")

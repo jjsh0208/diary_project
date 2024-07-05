@@ -5,11 +5,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.example.diary.Security.SecurityUtil;
+
 import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.matching.service.MatchingService;
 import org.example.diary.user.User;
 import org.example.diary.user.UserRepository;
 import org.example.diary.user.UserService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,7 @@ public class DiaryController {
     private final UserRepository userRepository;
 
     private final MatchingService matchingService;
+
 
     @GetMapping("/list")
     public String diaryList(Model model, HttpSession session){
@@ -67,7 +70,7 @@ public class DiaryController {
 
         model.addAttribute("diaryList" , diaries);
         model.addAttribute("user",user);
-        System.out.println(user.getIsMatched());
+
         return "diary/index";
     }
 
@@ -89,14 +92,15 @@ public class DiaryController {
     }
 
     @PostMapping("/write")
+
     public String diaryCreate(@Valid DiaryFormDTO diaryForm, BindingResult bindingResult){
+
         if (bindingResult.hasErrors()){
             return "diary/diaryForm";
         }
 
         // 파일 업로드 처리
         MultipartFile file = diaryForm.getImgFile();
-
         try {
             diaryService.diaryCreate(diaryForm.getSubject(),diaryForm.getContent(),
                     file,diaryForm.getMusic_url());
@@ -109,10 +113,12 @@ public class DiaryController {
     }
 
     @GetMapping(value = "/show/{id}")
+
     public String show(Model model,@PathVariable("id") Long id){
         Diary diary1 = diaryService.getDiary(id);
         System.out.println(diary1.getImgFile());
         model.addAttribute(diary1);
+
         return  "diary/diaryShow";
     }
 }
