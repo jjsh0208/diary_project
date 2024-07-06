@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
+
 import java.time.YearMonth;
 import java.util.Date;
 import java.util.List;
@@ -24,11 +25,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class DiaryService {
+public class  DiaryService {
 
     private final DiaryRepository diaryRepository;
 
     private final UserService userService;
+
+    private final HttpSession session;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -107,6 +110,7 @@ public class DiaryService {
 
         diaryRepository.save(diary);
     }
+
 
     public Diary getDiary(Long id) {
         Optional<Diary> diary = this.diaryRepository.findById(id);

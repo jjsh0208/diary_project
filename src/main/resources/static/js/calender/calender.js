@@ -61,7 +61,7 @@ function makeFirstWeek() {
 
 function makeCalendar() {
     let Calendar = [];
-    let container = document.querySelector("#Calendar");
+    let container = document.querySelector("#Calender");
     container.innerHTML = "";
     Calendar.push(makeFirstWeek());
     let m = calDic[month * 1];
@@ -91,7 +91,7 @@ function makeCalendar() {
     return Calendar;
 }
 
-let Calendar = makeCalendar();
+let Calender = makeCalendar();
 
 function handleWeek(opt) {
     document.getElementById(index).className = "imgview";

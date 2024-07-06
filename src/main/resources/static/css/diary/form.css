@@ -91,6 +91,7 @@
     text-align: center;
 }
 
+
 .filebox .upload-name {
     display: inline-block;
     height: 40px;
@@ -107,9 +108,7 @@
     padding: 10px 20px;
     color: #fff;
     vertical-align: middle;
-
     background-color: #ce7e61;
-
     cursor: pointer;
     height: 20px;
     margin-left: 10px;
@@ -123,7 +122,6 @@
     overflow: hidden;
     border: 0;
 }
-
 
 .search-form {
     display: flex;

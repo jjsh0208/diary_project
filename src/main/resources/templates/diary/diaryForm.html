@@ -40,11 +40,12 @@
                         <input type="file" id="file" name="imgFile" />
                     </div>
                 </div>
-                      <div class="form-group">
-                          <input id="music_url" name="music_url" type="hidden" value="">
-                          <input class="search-input" name="keyword" value="" placeholder="Search..." type="text"/>
-                          <button class="search-button" type="button" onclick="searchFunction()">Search</button>
+                <div class="form-group">
+                      <input id="music_url" name="music_url" type="hidden" value="">
+                      <input class="search-input" name="keyword" value="" placeholder="Search..." type="text"/>
+                      <button class="search-button" type="button" onclick="searchFunction()">Search</button>
                 </div>
+
                 <div class="button-container">
                     <button type="button" class="cancel-button">Cancel</button>
                     <button type="submit" class="submit-button">Save Entry</button>
@@ -54,6 +55,7 @@
         </div>
     </div>
 </div>
+
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', (event) => {
       // 추가
