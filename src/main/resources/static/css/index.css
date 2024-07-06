@@ -1,0 +1,96 @@
+/* Resetting default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styles for the container */
+.container-right {
+    width: 67%; /* 변경된 부분 */
+    padding: 40px;
+    max-height: 100vh; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+/* Hide scrollbar */
+.container-right::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+.container-right {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.user-name{
+    padding: 10px;
+}
+
+.year-month{
+    padding-bottom: 20px;
+    margin-left: 22%;
+}
+
+/* Styles for the header section */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn-new-entry {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-new-entry:hover {
+    background-color: #393939;
+}
+
+/* Styles for individual diary entries */
+.entries {
+    display: grid;
+    gap: 20px;
+}
+
+/* Continuation of index.css */
+
+/* Styles for individual diary entries */
+.entry {
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background-color: white;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.entry-header {
+    margin-bottom: 10px;
+}
+
+.entry-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.entry-date {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+.entry-content {
+    line-height: 1.6;
+}

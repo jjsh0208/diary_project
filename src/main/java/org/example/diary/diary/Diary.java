@@ -2,10 +2,10 @@ package org.example.diary.diary;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import org.example.diary.user.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -26,6 +26,7 @@ public class Diary {
     private String subject;
 
     @Column(length = 500 , nullable = false, columnDefinition = "TEXT")
+
     private String content;
 
     @Column
