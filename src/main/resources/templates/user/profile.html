@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내정보</title>
+    <link rel="stylesheet" th:href="@{/css/user/signup.css}">
+    <script type="module" th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'"></script>
+    <script nomodule th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">내정보</h1>
+        <p class="subtitle">회원 정보를 변경합니다.</p>
+    </div>
+    <form class="form" th:action="@{/user/update}" method="post">
+        <div class="form-group">
+            <div class="input-group">
+                <label for="email"><ion-icon name="mail-outline"></ion-icon> 이메일</label>
+                <input id="email" name="email" type="email" placeholder="example@email.com" th:value="${user.email}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="name"><ion-icon name="person-outline"></ion-icon> 이름</label>
+                <input id="name" type="text" name="name" placeholder="홍길동" th:value="${user.name}" required>
+                <p class="help-text">변경하실 이름을 입력해주세요.</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="birthDate"><ion-icon name="person-outline"></ion-icon> 생일</label>
+                <input id="birthDate" type="text" name="birthDate" th:value="${user.birthDate}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="phone"><ion-icon name="phone-portrait-outline"></ion-icon> 전화번호</label>
+                <input id="phone" type="tel" name="phone" placeholder="010-1234-5678" th:value="${user.phone}" required>
+                <p class="help-text">변경하실 전화번호를 입력해주세요.</p>
+            </div>
+            <div class="input-group">
+                <label for="sex"><ion-icon name="male-female-outline"></ion-icon> 성별</label>
+                <select id="sex" name="sex" required>
+                    <option value="">선택해주세요</option>
+                    <option value="m" th:selected="${user.sex == 'm'}">M</option>
+                    <option value="f" th:selected="${user.sex == 'f'}">F</option>
+                    <option value="o" th:selected="${user.sex == 'o'}">O</option>
+                </select>
+                <p class="help-text">성별을 선택해주세요.</p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="mbti"><ion-icon name="extension-puzzle-outline"></ion-icon> MBTI</label>
+            <select id="mbti" name="mbti" required>
+                <option value="">선택해주세요</option>
+                <option value="infp" th:selected="${user.mbti == 'infp'}">INFP</option>
+                <option value="enfp" th:selected="${user.mbti == 'enfp'}">ENFP</option>
+                <!-- 나머지 MBTI 옵션들도 동일한 방식으로 Thymeleaf 사용 -->
+            </select>
+            <p class="help-text">MBTI 유형을 선택해주세요.</p>
+        </div>
+        <button class="submit-button">비밀번호 변경하러 가기</button>
+        <button type="submit" class="submit-button">변경</button>
+    </form>
+</div>
+</body>
+</html>
