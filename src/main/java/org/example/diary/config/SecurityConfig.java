@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity //이 설정을 통해 웹 사이트의 모든 URL을 보안 처리하겠다는 것을 의미
-public class SecurityConfig{
+public class SecurityConfig  {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http ) throws Exception {
@@ -36,7 +37,7 @@ public class SecurityConfig{
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login") // 커스텀 로그인 페이지 설정
                         .loginProcessingUrl("/user/login") // 사용자 이름과 비밀번호를 제출할 URL
-                        .defaultSuccessUrl("/") // 로그인 성공 후 리디렉션할 페이지
+                        .defaultSuccessUrl("/",true) // 로그인 성공 후 리디렉션할 페이지
                         .permitAll()) // 모든 사용자가 로그인 페이지에 접근할 수 있도록 허용
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")) // 로그아웃할 때 사용할 URL

@@ -38,16 +38,12 @@ public class DiaryController {
 
     @GetMapping("/list")
     public String diaryList(Model model, HttpSession session){
-        List<Diary> diaries = diaryService.getList();
-
-        // 세션에 저장된 사용자 정보가 없을 경우에만 가져옴
-        if (session.getAttribute("currentUser") == null) {
-            User user = this.userService.getUser(SecurityUtil.getCurrentUsername());
-            session.setAttribute("currentUser", user);
-        }
 
         // 세션에서 사용자 정보를 가져와 모델에 추가
-        User user = (User) session.getAttribute("currentUser");
+        User user = userService.UserSessionCheck(session);
+
+        List<Diary> diaries = diaryService.getMonthlyDiary(user.getId());
+
 
         // 추가된 변경 대상 검사 및 세션 업데이트
         Optional<User> optionalUser = userRepository.findById(user.getId()); // db에 저장되어 있는 동일한 객체 (매치드 변경이 반영되어있다.)
@@ -77,14 +73,8 @@ public class DiaryController {
     @GetMapping("/write")
     public String diaryCreate(DiaryFormDTO diaryForm ,Model model ,HttpSession session){
 
-        // 세션에 저장된 사용자 정보가 없을 경우에만 가져옴
-        if (session.getAttribute("currentUser") == null) {
-            User user = this.userService.getUser(SecurityUtil.getCurrentUsername());
-            session.setAttribute("currentUser", user);
-        }
-
         // 세션에서 사용자 정보를 가져와 모델에 추가
-        User user = (User) session.getAttribute("currentUser");
+        User user = userService.UserSessionCheck(session);
 
         model.addAttribute("user",user);
 
@@ -115,10 +105,12 @@ public class DiaryController {
     @GetMapping(value = "/show/{id}")
 
     public String show(Model model,@PathVariable("id") Long id){
-        Diary diary1 = diaryService.getDiary(id);
-        System.out.println(diary1.getImgFile());
-        model.addAttribute(diary1);
+        Diary diary = diaryService.getDiary(id);
+
+        model.addAttribute(diary);
 
         return  "diary/diaryShow";
     }
+
+
 }

@@ -4,9 +4,8 @@ import org.example.diary.matching.entity.MatchingHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface DiaryRepository extends JpaRepository<Diary,Long> {
@@ -15,5 +14,8 @@ public interface DiaryRepository extends JpaRepository<Diary,Long> {
     
     // 히스토리 조회를 위한 diary의 matching_history_id 조회
     List<Diary> findByMatchingHistoryId(Long matchingHistoryId);
+ 
+    //회원 id 와 현재 달의 게시글만 받아옴
+    List<Diary> findByWriter_IdAndDateBetween(Long writerId, LocalDate startDate, LocalDate endDate);
 
 }

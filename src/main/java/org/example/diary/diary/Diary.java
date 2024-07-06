@@ -7,7 +7,6 @@ import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.user.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -43,5 +42,6 @@ public class Diary {
     @ManyToOne
     @JoinColumn(name = "matching_history_id")
     private MatchingHistory matchingHistory;
+
 
 }
