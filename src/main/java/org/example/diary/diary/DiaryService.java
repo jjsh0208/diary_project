@@ -120,12 +120,6 @@ public class DiaryService {
         LocalDate startDate = currentMonth.atDay(1);
         LocalDate endDate = currentMonth.atEndOfMonth();
 
-        LocalDate date = LocalDate.now();
-        System.out.println(date);
-        System.out.println(startDate + "시작 달");
-        System.out.println(endDate + " 끝 달");
-
-
         return diaryRepository.findByWriter_IdAndDateBetween(id,startDate,endDate);
     }
 
