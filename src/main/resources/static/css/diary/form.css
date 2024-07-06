@@ -57,6 +57,7 @@
 }
 
 .submit-button {
+
     width: 120px;
     height: 40px;
     padding: 10px;
@@ -90,7 +91,6 @@
     text-align: center;
 }
 
-
 .filebox .upload-name {
     display: inline-block;
     height: 40px;
@@ -107,7 +107,9 @@
     padding: 10px 20px;
     color: #fff;
     vertical-align: middle;
+
     background-color: #ce7e61;
+
     cursor: pointer;
     height: 20px;
     margin-left: 10px;
@@ -120,5 +122,34 @@
     padding: 0;
     overflow: hidden;
     border: 0;
+}
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+.search-button {
+    height: 40px;
+    border: none;
+    background-color: #d9bcff;
+    color: #fff;
+    padding: 0 16px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #c296fd;
 }
 

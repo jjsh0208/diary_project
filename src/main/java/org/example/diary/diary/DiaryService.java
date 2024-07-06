@@ -2,10 +2,12 @@ package org.example.diary.diary;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
 import org.example.diary.user.User;
 import org.example.diary.user.UserService;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Date;
@@ -50,7 +53,6 @@ public class DiaryService {
             filePath = uploadDirFile.getAbsolutePath() + File.separator + newFileName;
 
             imgFile.transferTo(new File(filePath));
-
 
             String os = System.getProperty("os.name").toLowerCase();
             String separator = "";
@@ -115,21 +117,13 @@ public class DiaryService {
         }
     }
 
+
     public List<Diary> getMonthlyDiary(Long id) {
         YearMonth currentMonth = YearMonth.now();
         LocalDate startDate = currentMonth.atDay(1);
         LocalDate endDate = currentMonth.atEndOfMonth();
 
-        LocalDate date = LocalDate.now();
-        System.out.println(date);
-        System.out.println(startDate + "시작 달");
-        System.out.println(endDate + " 끝 달");
-
-
         return diaryRepository.findByWriter_IdAndDateBetween(id,startDate,endDate);
     }
-
-
-
 
 }

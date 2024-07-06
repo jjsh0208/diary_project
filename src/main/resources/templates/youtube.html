@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube</title>
+    <link rel="stylesheet" th:href="@{../css/youtube/modal.css}">
+    <link rel="stylesheet" th:href="@{../css/youtube/button.css}">
+
+<!--    폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <style>
+        .dongle-regular {
+            font-family: "Dongle", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 32px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <!--        youtube 페이지로 매핑되면 뜨는 3개 옵션창-->
+        <div class="results" th:each="youtube : ${youtubeInfo}">
+            <div class="result-item">
+                <h5 class="result-title" th:text="${youtube.key}" th:attr="data-key=${youtube.key}"></h5>
+                <a href="#" class="btn-3d play"  onclick="openVideo(this)" th:data-url="@{'https://www.youtube.com/embed/' + ${youtube.value}}">Play</a>
+                <button class="btn-3d select" onclick="Click_bth(this, this)" th:data-url="@{'https://www.youtube.com/watch?v=' + ${youtube.value}}" th:data-key="${youtube.key}">Select</button>
+            </div>
+        </div>
+
+        <!--        검색해서 play 누르면 나오는 유튜브 영상 재생 위한 모달-->
+        <div id="videoModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <iframe id="videoFrame" width="600" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{../js/modal.js}"></script>
+<script>
+    // 파싱 및 DOM 변환 함수
+    document.addEventListener('DOMContentLoaded', function() {
+        var elements = document.querySelectorAll('.result-title');
+        elements.forEach(function(element) {
+            var rawString = element.getAttribute('data-key');
+            var parser = new DOMParser();
+            var parsedHtml = parser.parseFromString(rawString, 'text/html');
+            var parsedElement = parsedHtml.body.firstChild;
+            if (parsedElement) {
+                element.textContent = parsedElement.textContent;
+            } else {
+                element.textContent = rawString; // 파싱 실패 시 원본 문자열 사용
+            }
+        });
+    });
+</script>
+</body>
+</html>
