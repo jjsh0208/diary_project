@@ -5,8 +5,7 @@ import lombok.*;
 
 import org.example.diary.user.User;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -37,6 +36,6 @@ public class Diary {
     private String music_url;
 
     @Column
-    private Date date;
+    private LocalDate date;
 
 }

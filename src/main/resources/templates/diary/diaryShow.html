@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너의 하루</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
-<!--    추가-->
     <link rel="stylesheet" th:href="@{/css/diary/music.css}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -30,12 +29,7 @@
     </div>
     <div class="entries">
         <div class="entry">
-           <div th:if="${diary.imgFile != null}">
-                <img th:src="${diary.imgFile}" alt="user img" class="entry-image" />
-            </div>
-            <div th:unless="${diary.imgFile != null}">
-                <img src="/uploads/default.png" alt="default img" class="entry-image" />
-            </div>
+            <img th:src="${diary.imgFile != null ? diary.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
             <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
