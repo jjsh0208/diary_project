@@ -61,7 +61,7 @@ function makeFirstWeek() {
 
 function makeCalendar() {
     let Calendar = [];
-    let container = document.querySelector("#Calender");
+    let container = document.querySelector("#Calendar");
     container.innerHTML = "";
     Calendar.push(makeFirstWeek());
     let m = calDic[month * 1];
@@ -91,7 +91,7 @@ function makeCalendar() {
     return Calendar;
 }
 
-let Calender = makeCalendar();
+let Calendar = makeCalendar();
 
 function handleWeek(opt) {
     document.getElementById(index).className = "imgview";
@@ -125,4 +125,3 @@ function handleWeek(opt) {
 document.getElementById("year").innerHTML = year + " / ";
 document.getElementById("month").innerHTML = month;
 document.getElementById("title").innerHTML = month + " 월의 일기"
-
