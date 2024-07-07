@@ -16,7 +16,6 @@ public class MainController {
         if (authentication != null && authentication.isAuthenticated()) {
             model.addAttribute("username", authentication.getName());
         }
-        return "redirect:/index";
-
+        return "redirect:/diary/list";
     }
 }
