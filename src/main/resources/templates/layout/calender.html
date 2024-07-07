@@ -8,9 +8,8 @@
         <div th:if="${user.isMatched == 0}">
             <a th:onclick="|javascript:alert('매칭이 완료되었습니다.'); location.href='/matching/find-match?userId=${user.id}';|">매칭 신청</a>
         </div>
-        <a href="/user/logout">로그아웃</a>
-        <a href="#">test</a>
         <a href="/user/profile">내 정보</a>
+        <a href="/user/logout">로그아웃</a>
     </div>
     <div class="user-header">
         <span class="toggleButton" id="toggleButton">&#9776;</span>

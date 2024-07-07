@@ -31,6 +31,4 @@ public class HistoryService {
     public List<Diary> findDiariesByMatchingHistoryId(Long matchingHistoryId) {
         return diaryRepository.findByMatchingHistoryId(matchingHistoryId);
     }
-
-
 }

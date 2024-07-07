@@ -12,19 +12,23 @@
 </head>
 <body>
 <div class="container">
+    <div class="back-button" onclick="goBack()">
+        <ion-icon name="chevron-back-outline" class="custom-icon"></ion-icon>
+    </div>
     <div class="header">
+
         <div class="user-info">
             <span class="user-avatar">
                 <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
             </span>
-            <div class="user-name">John Doe</div>
+            <div class="user-name" th:text="${user.name} + '님'"></div>
         </div>
         <div class="title">Diary Exchange</div>
         <div class="user-info">
             <span class="user-avatar">
                 <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
             </span>
-            <div class="user-name">Jane Ahn</div>
+            <div class="user-name">익명의 친구</div>
         </div>
     </div>
     <div class="entries">
@@ -33,8 +37,6 @@
             <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
-                <p>Until next time,</p>
-                <p>유저명</p>
             </div>
             <!--음악 재생 추가-->
             <div class="wrap_music" data-entry="1">
@@ -67,8 +69,6 @@
             <div class="entry-title" th:text="${partner != null ? partner.subject : '상대방의 일기가 아직 작성되지 않았습니다.'}"></div>
             <div class="entry-content">
                 <p th:utext="${partner != null ? partner.content : '조금만 기다려주세요.'}"></p>
-                <p th:if="${partner != null}">Until next time,</p>
-                <p th:if="${partner != null}">유저명</p>
             </div>
             <!--음악 재생 추가-->
             <div class="wrap_music" th:if="${partner != null}" data-entry="2">
@@ -99,6 +99,11 @@
 </div>
 
 <script th:src="@{/js/music.js}"></script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 </body>
 </html>

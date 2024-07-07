@@ -18,13 +18,6 @@ public class MatchingController {
     private final MatchingService matchingService;
 
     // 매칭 신청
-//    @GetMapping("/find-match")
-//    public String findMatch(@RequestParam Long userId) {
-//            matchingService.findMatch(userId);
-//            return "redirect:/";
-//    }
-
-    // 매칭 신청
     @GetMapping("/find-match")
     public String findMatch(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
         Optional<User> matchedUser = matchingService.findMatch(userId);

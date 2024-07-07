@@ -109,16 +109,16 @@ public class DiaryController {
     }
 
     @GetMapping(value = "/show/{id}")
-    public String show(Model model,@PathVariable("id") Long id){
+    public String show(Model model,@PathVariable("id") Long id, HttpSession session){
         Diary diary = diaryService.getDiary(id);
         Diary partnerDiary = diaryService.getPartnerDiary(diary.getWriter().getId() ,diary.getDate());
-        //다이어리 작성일이 같고 매칭 되어 있는 상대의 글
-        //매칭되어있는 상대 확인 법
+
+        User user = userService.UserSessionCheck(session);
 
         //작성자 와  매칭되어있고 and 같은 날짜의 글을 가져온다.
         model.addAttribute("diary",diary);
         model.addAttribute("partner",partnerDiary);
-
+        model.addAttribute("user",user);
         return  "diary/diaryShow";
     }
 }
