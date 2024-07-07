@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
+import org.example.diary.matching.repository.MatchingHistoryRepository;
 import org.example.diary.user.User;
+import org.example.diary.user.UserRepository;
 import org.example.diary.user.UserService;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
+
 import java.time.YearMonth;
 import java.util.Date;
 import java.util.List;
@@ -24,11 +27,17 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class DiaryService {
+public class  DiaryService {
 
     private final DiaryRepository diaryRepository;
 
+    private final MatchingHistoryRepository matchingHistoryRepository;
+
+    private final UserRepository userRepository;
+
     private final UserService userService;
+
+    private final HttpSession session;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -108,6 +117,7 @@ public class DiaryService {
         diaryRepository.save(diary);
     }
 
+
     public Diary getDiary(Long id) {
         Optional<Diary> diary = this.diaryRepository.findById(id);
         if (diary.isPresent()){
@@ -117,6 +127,17 @@ public class DiaryService {
         }
     }
 
+    public Diary getPartnerDiary(Long userId, LocalDate date) {
+        //글을 보는 유저의 id와 오늘 diary 작성일자
+        Long oppositeUserId = matchingHistoryRepository.findOppositeUserIdById(userId);
+        if (oppositeUserId != null) {
+            Optional<User> partner = userRepository.findById(oppositeUserId);
+            if (partner.isPresent()) {
+                return diaryRepository.findByWriterAndDate(partner.get(), date);
+            }
+        }
+        return null;
+    }
 
     public List<Diary> getMonthlyDiary(Long id) {
         YearMonth currentMonth = YearMonth.now();

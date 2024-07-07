@@ -125,4 +125,3 @@ function handleWeek(opt) {
 document.getElementById("year").innerHTML = year + " / ";
 document.getElementById("month").innerHTML = month;
 document.getElementById("title").innerHTML = month + " 월의 일기"
-
