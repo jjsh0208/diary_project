@@ -1,42 +1,32 @@
 package org.example.diary.user;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.example.diary.Security.SecurityUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private HttpSession httpSession;
 
     public void save(UserRegisterDTO userDto) {
         String rawPassword = userDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 
-        Date birthDate = null;
-        try {
-            birthDate = dateFormat.parse(userDto.getBirthDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         User user = User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .phone(userDto.getPhone())
-                .birthDate(birthDate)
+                .birthDate(userDto.getBirthDate())
                 .sex(userDto.getSex())
                 .mbti(userDto.getMbti())
                 .password(encPassword)
@@ -44,12 +34,18 @@ public class UserService {
         userRepository.save(user);
     }
 
+
     public User getUser(String email){
         User user = this.userRepository.findByEmail(email);
         if (user != null){
             return user;
         }
         return null;
+    }
+
+    public Optional<User> profile(){
+        Long userId = SecurityUtil.getCurrentUserId();   //
+        return userRepository.findById(userId);
     }
 
     public User UserSessionCheck(HttpSession session){
@@ -63,5 +59,36 @@ public class UserService {
         return (User) session.getAttribute("currentUser");
     }
 
+    public void update(UserUpdateDTO userUpdateDTO){
+        Long userId = SecurityUtil.getCurrentUserId();
+        User user = userRepository.findById(userId).orElse(null);
+        user.setName(userUpdateDTO.getName());
+        user.setPhone(userUpdateDTO.getPhone());
+        user.setSex(userUpdateDTO.getSex());
+        user.setMbti(userUpdateDTO.getMbti());
 
+        userRepository.save(user);
+    }
+
+    public void updatePw(UpdatePwDTO updatePwDTO){
+        String rawPassword = updatePwDTO.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        String userEmail = String.valueOf(httpSession.getAttribute("email"));
+        User user = userRepository.findByEmail(userEmail);
+        System.out.println(user.getEmail());
+
+        user.setPassword(encPassword);
+        userRepository.save(user);
+    }
+
+    public int sendCode(String email){
+        System.out.println(email);
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            return 0;  //이메일이 존재하지 않음
+        }else{
+            //email api 호출 부분
+            return 1;   //정상동작
+        }
+    }
 }
