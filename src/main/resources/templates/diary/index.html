@@ -18,7 +18,7 @@
         <div class="header">
             <h1 class="title" id="title"></h1>
 
-            <button class="btn-new-entry"  onclick="location.href='/diary/write'" >오늘의 일기 쓰기</button>
+            <button class="btn-new-entry" id="write" onclick="location.href='/diary/write'" >오늘의 일기 쓰기</button>
         </div>
         <div class="entries">
             <div class="entry-list" th:each="diary : ${diaryList} " th:onclick="'window.location.href=\'/diary/show/' + ${diary.id} + '\';'">
@@ -35,5 +35,24 @@
 </div>
 <script th:src="@{/js/calender/calender.js}"></script>
 <script th:src="@{/js/calender/menu.js}"></script>
+<!--일기 작성 여부에 따라 작성 버튼 활성/비활성화 기능 자바스크립트 코드-->
+<!--<script th:inline="javascript">-->
+<!--    //-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        var diaryList = [[${diaryList}]];-->
+<!--        var today = new Date().toISOString().slice(0, 10);-->
+<!--        var isTodayDiaryWritten = diaryList.some(function(diary) {-->
+<!--            return diary.date.startsWith(today);-->
+<!--        });-->
+
+<!--        var newEntryButton = document.getElementById('write');-->
+<!--        if (isTodayDiaryWritten) {-->
+<!--            newEntryButton.disabled = true;-->
+<!--            newEntryButton.textContent = '오늘의 일기는 이미 작성되었습니다';-->
+<!--        } else {-->
+<!--            newEntryButton.disabled = false;-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

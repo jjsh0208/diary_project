@@ -5,7 +5,10 @@ body {
     margin: 0;
     padding: 0;
 }
-
+a {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 링크의 기본 색상으로 설정 */
+}
 .container {
     max-width: 600px; /* Adjust width to fit all inputs */
     margin: 50px auto;

@@ -14,22 +14,23 @@
         <h1 class="title">비밀번호 변경</h1>
         <p class="subtitle">비밀번호를 변경합니다.</p>
     </div>
-    <form class="form" th:action="@{/user/update}" method="post">
+    <form class="form" th:action="@{/user/updatePw}" method="post">
         <div class="form-group">
             <div class="input-group">
-                <label for="email"><ion-icon name="mail-outline"></ion-icon> 비밀번호</label>
-                <input id="email" name="email" type="email" placeholder="example@email.com" th:value="${user.email}" disabled>
+                <label for="password"><ion-icon name="mail-outline"></ion-icon> 비밀번호</label>
+                <input id="password" name="password" type="password" placeholder="***************" required>
                 <p class="help-text">변경하실 비밀번호를 입력해주세요.</p>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <label for="name"><ion-icon name="person-outline"></ion-icon> 비밀번호 확인</label>
-                <input id="name" type="text" name="name" placeholder="홍길동" th:value="${user.name}" required>
+                <label for="confirmPw"><ion-icon name="person-outline"></ion-icon> 비밀번호 확인</label>
+                <input id="confirmPw" type="password" name="confirmPw" placeholder="***************" required>
                 <p class="help-text">한번더 입력해 주세요.</p>
             </div>
         </div>
         <button type="submit" class="submit-button">변경</button>
+        <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
     </form>
 </div>
 </body>

@@ -2,7 +2,6 @@ package org.example.diary.user;
 
 import jakarta.servlet.http.HttpSession;
 import org.example.diary.Security.SecurityUtil;
-import org.example.diary.Security.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,9 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private HttpSession httpSession;
+
     public void save(UserRegisterDTO userDto) {
         String rawPassword = userDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -31,7 +33,6 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
-
 
     public User getUser(String email){
         User user = this.userRepository.findByEmail(email);
@@ -66,5 +67,27 @@ public class UserService {
         user.setMbti(userUpdateDTO.getMbti());
 
         userRepository.save(user);
+    }
+
+    public void updatePw(UpdatePwDTO updatePwDTO){
+        String rawPassword = updatePwDTO.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        String userEmail = String.valueOf(httpSession.getAttribute("email"));
+        User user = userRepository.findByEmail(userEmail);
+        System.out.println(user.getEmail());
+
+        user.setPassword(encPassword);
+        userRepository.save(user);
+    }
+
+    public int sendCode(String email){
+        System.out.println(email);
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            return 0;  //이메일이 존재하지 않음
+        }else{
+            //email api 호출 부분
+            return 1;   //정상동작
+        }
     }
 }
