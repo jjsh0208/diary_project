@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>매칭 히스토리</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/diary/history.css}">
+</head>
+<body>
+<h1>매칭 히스토리</h1>
+<h3><p>이름: <span th:text="${user.name}">이름</span></p></h3>
+<div th:each="history : ${historyList}" th:if="${history.endDate != null}" class="history-item">
+    <a th:href="@{|/mypage/historyShow/${history.id}|}">
+        <p><span th:text="${#temporals.format(history.startDate, 'yy-MM-dd')}"></span>
+            ~<span th:text="${#temporals.format(history.endDate, 'yy-MM-dd')}"></span></p>
+    </a>
+</div>
+<div>
+    <button th:onclick="|location.href='/'|">이전으로</button>
+</div>
+</body>
+</html>

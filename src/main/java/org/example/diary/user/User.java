@@ -42,6 +42,10 @@ public class User {
     @Column(length = 4, nullable = false)
     private String mbti;
 
+    // 매칭 여부 추가
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int isMatched = 0;
+
     @OneToMany(mappedBy = "writer") // Diary 엔티티의 user 필드에 매핑됨
     private List<Diary> diaries;
 }

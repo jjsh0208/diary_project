@@ -17,5 +17,6 @@ public class MainController {
             model.addAttribute("username", authentication.getName());
         }
         return "redirect:/diary/list";
+
     }
 }

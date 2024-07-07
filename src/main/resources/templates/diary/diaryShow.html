@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너의 하루</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/diary/show.css}">
-
-
+    <link rel="stylesheet" th:href="@{/css/diary/music.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -14,54 +14,91 @@
 <div class="container">
     <div class="header">
         <div class="user-info">
-      <span class="user-avatar">
-          <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
-      </span>
+            <span class="user-avatar">
+                <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
+            </span>
             <div class="user-name">John Doe</div>
         </div>
         <div class="title">Diary Exchange</div>
         <div class="user-info">
-      <span class="user-avatar">
-          <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
-      </span>
+            <span class="user-avatar">
+                <ion-icon name="person-sharp" class="custom-icon"></ion-icon>
+            </span>
             <div class="user-name">Jane Ahn</div>
         </div>
     </div>
     <div class="entries">
         <div class="entry">
-            <div th:if="${diary.imgFile != null}">
-                <img th:src="${diary.imgFile}" alt="user img" class="entry-image" />
-            </div>
-            <div th:unless="${diary.imgFile != null}">
-                <img src="/uploads/default.png" alt="default img" class="entry-image" />
-            </div>
+            <img th:src="${diary.imgFile != null ? diary.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
             <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
                 <p th:utext="${diary.content}"></p>
+                <p>Until next time,</p>
+                <p>유저명</p>
             </div>
-            <div class="entry-audio">
-                <audio controls th:src="${diary.music_url}"></audio>
+            <!--음악 재생 추가-->
+            <div class="wrap_music" data-entry="1">
+                <input type="hidden" id="musicUrl1" th:value="${diary.music_url}">
+                <div class="music_inner">
+                    <div class="music_control">
+                        <div class="play-pause">
+                            <i id="control-play1" class="material-icons" title="재생">play_arrow</i>
+                        </div>
+                        <div class="music_progress">
+                            <div class="bar" id="progress-bar1"></div>
+                            <div class="timer">
+                                <span class="current" id="current-time1">0:00</span>
+                                <span class="duration" id="duration-time1">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="musicPlayerModal1" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeMusicPlayerModal(1)">&times;</span>
+                        <div id="musicPlayer1"></div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="entry">
-            <img src="/placeholder.svg" alt="Jane's Response" class="entry-image" />
-            <div class="entry-title">Jane's Response</div>
+            <img th:src="${partner != null && partner.imgFile != null ? partner.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
+            <div class="entry-title" th:text="${partner != null ? partner.subject : '상대방의 일기가 아직 작성되지 않았습니다.'}"></div>
             <div class="entry-content">
-                <p>Dear John,</p>
-                <p>
-                    I'm so glad to hear that you had a wonderful day and were able to appreciate the beauty around you. It's
-                    the little things in life that often bring the most joy, isn't it?
-                    I'm grateful that we have this special diary exchange to share our thoughts and experiences with each
-                    other. It's a wonderful way for us to stay connected and support one another.
-                </p>
-                <p>Jane</p>
+                <p th:utext="${partner != null ? partner.content : '조금만 기다려주세요.'}"></p>
+                <p th:if="${partner != null}">Until next time,</p>
+                <p th:if="${partner != null}">유저명</p>
             </div>
-            <div class="entry-audio">
-                <audio controls></audio>
+            <!--음악 재생 추가-->
+            <div class="wrap_music" th:if="${partner != null}" data-entry="2">
+                <input type="hidden" id="musicUrl2" th:value="${partner.music_url}">
+                <div class="music_inner">
+                    <div class="music_control">
+                        <div class="play-pause">
+                            <i id="control-play2" class="material-icons" title="재생">play_arrow</i>
+                        </div>
+                        <div class="music_progress">
+                            <div class="bar" id="progress-bar2"></div>
+                            <div class="timer">
+                                <span class="current" id="current-time2">0:00</span>
+                                <span class="duration" id="duration-time2">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="musicPlayerModal2" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeMusicPlayerModal(2)">&times;</span>
+                        <div id="musicPlayer2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script th:src="@{/js/music.js}"></script>
 
 </body>
 </html>

@@ -33,17 +33,20 @@
                         <label for="content" class="label"><ion-icon name="pencil-outline"></ion-icon>  Content</label>
                         <textarea id="content" name="content" class="textarea" placeholder="여기에 일기를 작성하세요..." required></textarea>
                     </div>
-                <div class="form-group">
+                <div class="form-group-horizontal">
                     <div class="filebox">
                         <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
                         <label for="file"><ion-icon name="image-outline"></ion-icon>  Today's Picture</label>
                         <input type="file" id="file" name="imgFile" />
                     </div>
-                </div>
-                    <div class="form-group">
-                        <label for="mood" class="label"><ion-icon name="logo-youtube"></ion-icon>  오늘의 노래 추천</label>
-                        <button id="mood" class="mood-button">노래 찾기</button>
+                    <div class="search-container">
+                        <input id="music_url" name="music_url" type="hidden" value="">
+                        <input class="search-input" name="keyword" value="" placeholder="Search..." type="text"/>
+                        <button class="search-button" type="button" onclick="searchFunction()">Search</button>
                     </div>
+                </div>
+
+
                 <div class="button-container">
                     <button type="button" class="cancel-button">Cancel</button>
                     <button type="submit" class="submit-button">Save Entry</button>
@@ -53,7 +56,56 @@
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // 추가
+      // localStorage에서 기존 내용을 복원
+      const savedTitle = localStorage.getItem('diaryTitle');
+      const savedContent = localStorage.getItem('diaryContent');
+      const videoLink = localStorage.getItem('selectedVideoLink');
+      const videoName = localStorage.getItem('selectedVideoName');
+
+      if (savedTitle) {
+        document.getElementById('subject').value = savedTitle;
+      }
+      if (savedContent) {
+        document.getElementById('content').value = savedContent;
+      }
+      // 새로 가져온 유튜브 영상 링크 value에 저장
+      if (videoLink) {
+        const UploadName = document.querySelector('.search-input');
+        UploadName.value = videoName;
+        document.getElementById('music_url').value = videoLink;
+        localStorage.removeItem('selectedVideoLink'); // 사용 후 삭제
+          // 파일 못가져옴 처리 : 파일 이름란에 다시 선택 띄우기
+          document.querySelector('.upload-name').value = '파일을 다시 선택해 주세요.';
+      }
+
+      // 로컬 저장소 초기화
+      localStorage.removeItem('diaryTitle');
+      localStorage.removeItem('diaryContent');
+    });
+</script>
+
+<!--추가-->
+<script>
+  function searchFunction() {
+    const keyword = document.querySelector('.search-input').value;
+    const title = document.getElementById('subject').value;
+    const content = document.getElementById('content').value;
+
+    // 기존 내용을 localStorage에 저장
+    localStorage.setItem('diaryTitle', title);
+    localStorage.setItem('diaryContent', content);
+
+    // 검색 쿼리를 포함하여 youtube.html로 이동합니다.
+    window.location.href = `/youtube?keyword=${encodeURIComponent(keyword)}`;
+  }
+</script>
+
 <script th:src="@{/js/calender/calender.js}"></script>
 <script th:src="@{/js/calender/menu.js}"></script>
+<script th:src="@{/js/diary/form.js}"></script>
 </body>
 </html>
