@@ -1,7 +1,12 @@
+.container {
+    position: relative; /* 자식 요소의 절대 위치를 기준으로 설정 */
+}
+
 .button-container {
     display: flex;
     justify-content: space-between; /* 버튼을 양쪽 끝으로 정렬 */
     margin-top: 20px;
+    align-items: center;
 }
 
 /* 추가된 스타일 */
@@ -30,4 +35,42 @@
     box-shadow: 0 0 0 1px #21c59d inset,
     0 0 0 2px rgba(255, 255, 255, 0.15) inset,
     0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+.update-password {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.update-password a {
+    margin-left: 10px; /* 링크 간 간격 조정 */
+    text-decoration: none;
+    color: black;
+}
+
+.update-password a:hover {
+    color: #21c59d;
+}
+.rest-link {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.rest-link a {
+    margin-left: 10px; /* 링크 간 간격 조정 */
+    text-decoration: none;
+    color: black;
+}
+
+.rest-link a:hover {
+    color: #21c59d;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px; /* form 아래쪽에 위치하도록 간격 조정 */
 }

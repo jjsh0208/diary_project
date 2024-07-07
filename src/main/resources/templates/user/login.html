@@ -32,8 +32,10 @@
             <button type="submit" class="submit-button">로그인</button>
             <!-- 오류 메시지 표시 -->
             <p th:if="${param.error}" class="error-message">아이디 또는 비밀번호가 잘못되었습니다.</p>
-            <a th:href="@{/user/signup}">회원가입</a>
-            <a th:href="@{/user/updatePw}">비밀번호 찾기</a>
+            <div class="rest-link">
+                <a th:href="@{/user/signup}">회원가입</a>
+                <a th:href="@{/user/updatePw}">비밀번호 찾기</a>
+            </div>
         </div>
     </form>
 </div>
