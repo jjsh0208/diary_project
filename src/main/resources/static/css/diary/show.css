@@ -1,6 +1,6 @@
 /* CSS */
 body{
-    background-color: #ede2d1;
+    background-color: #FCF3E3;
 }
 
 
@@ -9,7 +9,7 @@ body{
     flex-direction: column;
     width: 100%;
     max-width: 768px;
-    background-color: #d07f62;
+    background-color: #f4a258;
     margin: 20px auto;
     border-radius: 8px;
     box-shadow: 0 10px 13px rgba(0, 0, 0, 0.5);
@@ -53,14 +53,14 @@ body{
 }
 
 .user-name {
-    color: #4b4b4b;
-    font-weight: 500;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .title {
     font-size: 24px;
     font-weight: bold;
-    color: #ede2d1;
+    color: #ffffff;
 }
 
 .entries {
@@ -70,7 +70,7 @@ body{
 }
 
 .entry {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 16px;
