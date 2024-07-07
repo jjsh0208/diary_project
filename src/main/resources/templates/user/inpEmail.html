@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 변경</title>
+    <link rel="stylesheet" th:href="@{/css/user/signup.css}">
+    <script type="module" th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'"></script>
+    <script nomodule th:src="'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">본인인증</h1>
+        <p class="subtitle">이메일을 통해 본인인증을 합니다.</p>
+    </div>
+    <form class="form" th:action="@{/user/sendCode}" method="post">
+        <div class="form-group">
+            <div class="input-group">
+                <label for="email"><ion-icon name="mail-outline"></ion-icon> 이메일</label>
+                <input id="email" name="email" type="text" placeholder="example@email.com" th:required="true">
+                <p class="help-text">가입하신 이메일을 입력해 주세요.</p>
+            </div>
+        </div>
+        <button type="submit" class="submit-button">코드받기</button>
+        <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+    </form>
+</div>
+</body>
+</html>

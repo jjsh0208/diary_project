@@ -2,7 +2,9 @@ package org.example.diary.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -16,7 +18,8 @@ public class UserRegisterDTO {
 
     private String name;
 
-    private String birthDate; //문자열로 받아와서 Date로 생성에 DB에 생성
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate;
 
     private String sex;
 
