@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
+import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.matching.repository.MatchingHistoryRepository;
 import org.example.diary.user.User;
 import org.example.diary.user.UserRepository;
@@ -105,16 +106,21 @@ public class  DiaryService {
         User writer = userService.getUser(SecurityUtil.getCurrentUsername());
         LocalDate date = LocalDate.now();
 
-        Diary diary = Diary.builder()
-                .writer(writer)
-                .subject(subject)
-                .content(content)
-                .imgFile(imgPath)
-                .music_url(music_url)
-                .date(date)
-                .build();
+        Optional<MatchingHistory> matchingHistory = matchingHistoryRepository.findMatchingHistoryByUserId(writer.getId());
 
-        diaryRepository.save(diary);
+        if (matchingHistory.isPresent()){
+            Diary diary = Diary.builder()
+                    .writer(writer)
+                    .matchingHistory(matchingHistory.get())
+                    .subject(subject)
+                    .content(content)
+                    .imgFile(imgPath)
+                    .music_url(music_url)
+                    .date(date)
+                    .build();
+            diaryRepository.save(diary);
+        }
+
     }
 
 
