@@ -9,6 +9,57 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        /* 추가된 CSS */
+        .reaction-overlay {
+            position: absolute;
+            bottom: 40px;
+            display: none;
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .reaction-button-wrapper {
+            display: flex;
+            gap: 5px;
+        }
+        .reaction-overlay button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .reaction-overlay button:hover {
+            transform: scale(1.2);
+        }
+        .reaction-button-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .reaction-button-wrapper:hover .reaction-overlay {
+            display: block;
+        }
+        .emoji-button-container {
+            margin-top: 10px;
+            position: relative;
+        }
+        .emoji-button-container button {
+            background-color: #f7c6a3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .emoji-button-container button:hover {
+            background-color: #edb897;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -36,7 +87,7 @@
                 <p>Until next time,</p>
                 <p>유저명</p>
             </div>
-            <!--음악 재생 추가-->
+            <!-- 음악 재생 추가 -->
             <div class="wrap_music" data-entry="1">
                 <input type="hidden" id="musicUrl1" th:value="${diary.music_url}">
                 <div class="music_inner">
@@ -60,6 +111,10 @@
                     </div>
                 </div>
             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="entry">
@@ -70,7 +125,7 @@
                 <p th:if="${partner != null}">Until next time,</p>
                 <p th:if="${partner != null}">유저명</p>
             </div>
-            <!--음악 재생 추가-->
+            <!-- 음악 재생 추가 -->
             <div class="wrap_music" th:if="${partner != null}" data-entry="2">
                 <input type="hidden" id="musicUrl2" th:value="${partner.music_url}">
                 <div class="music_inner">
@@ -94,9 +149,91 @@
                     </div>
                 </div>
             </div>
+            <!-- 리액션 버튼 추가 -->
+            <div class="reaction-buttons" th:if="${user?.id} != ${partner.writer.id}">
+                <div class="emoji-button-container">
+                    <button onclick="toggleEmojiOverlay(this)">이모티콘</button>
+                    <div class="reaction-overlay">
+                        <div class="reaction-button-wrapper">
+                            <button class="reaction-button" onclick="setReaction('😊', this)">😊</button>
+                            <button class="reaction-button" onclick="setReaction('😢', this)">😢</button>
+                            <button class="reaction-button" onclick="setReaction('❤️', this)">❤️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    var diaryId = /*[[${diary.id}]]*/ null;
+    var userId = /*[[${user.id}]]*/ null;
+</script>
+
+
+//controller랑
+<script>
+    async function setReaction(emoji, button) {
+        const container = button.closest('.emoji-button-container');
+        const mainButton = container.querySelector('button');
+
+        if (mainButton.innerText === emoji) {
+            mainButton.innerText = '이모티콘';
+        } else {
+            mainButton.innerText = emoji;
+        }
+
+        try {
+            const response = await fetch('/reactions/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    diaryId: diaryId,
+                    : userId,userId
+                    emoji: emoji
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('리액션 추가 실패');
+            }
+        } catch (error) {
+            console.error('리액션 추가 중 오류 발생:', error);
+        }
+
+        hideReactions(container);
+    }
+
+    function toggleEmojiOverlay(button) {
+        const container = button.closest('.emoji-button-container');
+        const overlay = container.querySelector('.reaction-overlay');
+        overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function hideReactions(container) {
+        const overlay = container.querySelector('.reaction-overlay');
+        overlay.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const response = await fetch(`/reactions/diary/${diaryId}/user/${userId}`);
+            if (!response.ok) {
+                throw new Error('리액션 가져오기 실패');
+            }
+            const reaction = await response.json();
+            if (reaction && reaction.emoji) {
+                const button = document.querySelector('.emoji-button-container button');
+                button.innerText = reaction.emoji;
+            }
+        } catch (error) {
+            console.error('리액션 가져오기 중 오류 발생:', error);
+        }
+    });
+</script>
 
 <script th:src="@{/js/music.js}"></script>
 
