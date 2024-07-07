@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
+import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.matching.repository.MatchingHistoryRepository;
 import org.example.diary.user.User;
 import org.example.diary.user.UserRepository;

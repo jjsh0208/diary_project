@@ -12,6 +12,9 @@ import java.util.Optional;
 
 public interface MatchingHistoryRepository extends JpaRepository<MatchingHistory, Long> {
 
+    Optional<MatchingHistory> findByUser1_Id(Long userId);
+    Optional<MatchingHistory> findByUser2_Id(Long userId);
+
     List<MatchingHistory> findByUser1IdOrUser2Id(Long userId, Long userId1);
 
     List<MatchingHistory> findByUser1OrUser2AndEndDateIsNull(User user1, User user2);
