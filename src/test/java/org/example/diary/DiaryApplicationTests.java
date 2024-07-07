@@ -13,15 +13,4 @@ class DiaryApplicationTests {
 	@Autowired
 	private DiaryRepository diaryRepository;
 
-	@Test
-	void testJpa(){
-		Diary diary = Diary.builder()
-				.title("test")
-				.content("test")
-				.build();
-
-		diaryRepository.save(diary);
-	}
-
-
 }

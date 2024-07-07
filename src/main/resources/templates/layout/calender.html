@@ -3,10 +3,10 @@
         <span class="closeButton" id="closeButton">&#9776;</span>
         <a th:onclick="|location.href='/mypage/${user.id}/myHistory'|">지난일기 보기</a>
         <div th:if="${user.isMatched == 1}">
-            <a th:href="|/matching/cancel-match?matchingHistoryId=${matchingHistoryId}&userId=${user.id}|">매칭 취소</a>
+            <a th:onclick="|javascript:alert('매칭이 취소되었습니다.'); location.href='/matching/cancel-match?matchingHistoryId=${matchingHistoryId}&userId=${user.id}';|">매칭 취소</a>
         </div>
         <div th:if="${user.isMatched == 0}">
-            <a th:href="|/matching/find-match?userId=${user.id}|">매칭 신청</a>
+            <a th:onclick="|javascript:alert('매칭이 완료되었습니다.'); location.href='/matching/find-match?userId=${user.id}';|">매칭 신청</a>
         </div>
         <a href="/user/logout">로그아웃</a>
         <a href="#">test</a>
@@ -23,21 +23,21 @@
     </div>
     <div id="weekDic"></div>
     <div id="Calendar"></div>
-<div id="back">
-    <div class="imgwrap">
-        <div class="imgview opaque" id="1"></div>
-        <div class="imgview" id="2"></div>
-        <div class="imgview" id="3"></div>
-        <div class="imgview" id="4"></div>
-        <div class="imgview" id="5"></div>
-        <div class="imgview" id="6"></div>
-        <div class="imgview" id="7"></div>
-        <div class="imgview" id="8"></div>
-        <div class="imgview" id="9"></div>
-        <div class="imgview" id="10"></div>
-        <div class="imgview" id="11"></div>
-        <div class="imgview" id="12"></div>
-        <div class="imgview" id="13"></div>
+    <div id="back">
+        <div class="imgwrap">
+            <div class="imgview opaque" id="1"></div>
+            <div class="imgview" id="2"></div>
+            <div class="imgview" id="3"></div>
+            <div class="imgview" id="4"></div>
+            <div class="imgview" id="5"></div>
+            <div class="imgview" id="6"></div>
+            <div class="imgview" id="7"></div>
+            <div class="imgview" id="8"></div>
+            <div class="imgview" id="9"></div>
+            <div class="imgview" id="10"></div>
+            <div class="imgview" id="11"></div>
+            <div class="imgview" id="12"></div>
+            <div class="imgview" id="13"></div>
+        </div>
     </div>
-</div>
 </div>

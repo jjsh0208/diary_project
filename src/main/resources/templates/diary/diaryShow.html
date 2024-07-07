@@ -28,7 +28,10 @@
         </div>
     </div>
     <div class="entries">
-        <div class="entry">
+        <div th:if="${noDiaryHistory}">
+            <p th:text="${noDiaryHistory}" style="color: black;"></p>
+        </div>
+        <div class="entry" th:if="${diary != null}">
             <img th:src="${diary.imgFile != null ? diary.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
             <div class="entry-title" th:text="${diary.subject}"></div>
             <div class="entry-content">
@@ -62,16 +65,16 @@
             </div>
         </div>
 
-        <div class="entry">
-            <img th:src="${partner != null && partner.imgFile != null ? partner.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
-            <div class="entry-title" th:text="${partner != null ? partner.subject : '상대방의 일기가 아직 작성되지 않았습니다.'}"></div>
+        <div class="entry" th:if="${partner != null}">
+            <img th:src="${partner.imgFile != null ? partner.imgFile : '/img/default.jpg'}" alt="default img" class="entry-image" />
+            <div class="entry-title" th:text="${partner.subject}"></div>
             <div class="entry-content">
-                <p th:utext="${partner != null ? partner.content : '조금만 기다려주세요.'}"></p>
-                <p th:if="${partner != null}">Until next time,</p>
-                <p th:if="${partner != null}">유저명</p>
+                <p th:utext="${partner.content}"></p>
+                <p>Until next time,</p>
+                <p>유저명</p>
             </div>
             <!--음악 재생 추가-->
-            <div class="wrap_music" th:if="${partner != null}" data-entry="2">
+            <div class="wrap_music" data-entry="2">
                 <input type="hidden" id="musicUrl2" th:value="${partner.music_url}">
                 <div class="music_inner">
                     <div class="music_control">
@@ -95,10 +98,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="entry" th:if="${partner == null}">
+            <img src="/img/default.jpg" alt="default img" class="entry-image" />
+            <div class="entry-title">상대방의 일기가 아직 작성되지 않았습니다.</div>
+            <div class="entry-content">
+                <p>조금만 기다려주세요.</p>
+            </div>
+        </div>
     </div>
 </div>
-
 <script th:src="@{/js/music.js}"></script>
-
 </body>
-</html>

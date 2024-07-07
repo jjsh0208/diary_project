@@ -97,7 +97,6 @@ public class DiaryController {
             e.printStackTrace();
             return "diary/diaryForm";
         }
-
         return "redirect:/diary/list";
     }
 

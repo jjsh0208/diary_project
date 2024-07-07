@@ -72,7 +72,14 @@ public class MyPageController {
 
         // 조회된 히스토리와 다이어리 목록을 모델에 추가
         model.addAttribute("matchingHistory", matchingHistory);
-        model.addAttribute("diaries", diaries);
+
+        if (diaries.isEmpty()) {
+            // 다이어리가 없을 경우 메시지를 모델에 추가
+            model.addAttribute("noDiaryHistory", "작성된 일기가 없습니다.");
+        } else {
+            // 다이어리가 있을 경우 다이어리 목록을 모델에 추가
+            model.addAttribute("diaries", diaries);
+        }
 
         // "diary/diaryShow" 뷰를 반환
         return "diary/diaryShow";
