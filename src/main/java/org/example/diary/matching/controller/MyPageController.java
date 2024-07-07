@@ -61,28 +61,22 @@ public class MyPageController {
     }
 
     // 히스토리 상세 (matching_history의 id값을 가져옴)
+
     @GetMapping("/historyShow/{matching_history_id}")
-    public String showHistoryDetails(@PathVariable Long matching_history_id, Model model) {
-        // matching_history_id로 MatchingHistory 엔티티 조회
-        MatchingHistory matchingHistory = historyService.findById(matching_history_id)
+    public String showHistoryDetails(@PathVariable("matching_history_id") Long matchingHistoryId, Model model) {
+        MatchingHistory matchingHistory = historyService.findById(matchingHistoryId)
                 .orElseThrow(() -> new RuntimeException("Matching history not found"));
 
-        // matching_history_id로 해당하는 다이어리 목록 조회
-        List<Diary> diaries = historyService.findDiariesByMatchingHistoryId(matching_history_id);
+        List<Diary> diaries = historyService.findDiariesByMatchingHistoryId(matchingHistoryId);
 
-        // 조회된 히스토리와 다이어리 목록을 모델에 추가
         model.addAttribute("matchingHistory", matchingHistory);
+        model.addAttribute("diaries", diaries);
 
         if (diaries.isEmpty()) {
-            // 다이어리가 없을 경우 메시지를 모델에 추가
             model.addAttribute("noDiaryHistory", "작성된 일기가 없습니다.");
-        } else {
-            // 다이어리가 있을 경우 다이어리 목록을 모델에 추가
-            model.addAttribute("diaries", diaries);
         }
 
-        // "diary/diaryShow" 뷰를 반환
-        return "diary/diaryShow";
+        return "diary/historyShow";
     }
 
 

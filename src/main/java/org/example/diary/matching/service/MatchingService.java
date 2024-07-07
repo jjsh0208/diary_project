@@ -1,5 +1,6 @@
 package org.example.diary.matching.service;
 
+import jakarta.persistence.NonUniqueResultException;
 import lombok.RequiredArgsConstructor;
 import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.matching.repository.MatchRepository;
@@ -122,4 +123,6 @@ public class MatchingService {
         List<MatchingHistory> matches = matchingHistoryRepository.findByUser1OrUser2AndEndDateIsNull(user, user);
         return matches.isEmpty() ? Optional.empty() : Optional.of(matches.get(0));
     }
+
+
 }

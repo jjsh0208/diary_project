@@ -1,10 +1,12 @@
 package org.example.diary.matching.service;
 
+import jakarta.persistence.NonUniqueResultException;
 import lombok.RequiredArgsConstructor;
 import org.example.diary.diary.Diary;
 import org.example.diary.diary.DiaryRepository;
 import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.matching.repository.MatchingHistoryRepository;
+import org.example.diary.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -29,5 +31,6 @@ public class HistoryService {
     public List<Diary> findDiariesByMatchingHistoryId(Long matchingHistoryId) {
         return diaryRepository.findByMatchingHistoryId(matchingHistoryId);
     }
+
 
 }

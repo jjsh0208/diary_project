@@ -22,4 +22,6 @@ public interface DiaryRepository extends JpaRepository<Diary,Long> {
     Diary findByWriterAndDate(User writer, LocalDate date);
 
 
+
+
 }
