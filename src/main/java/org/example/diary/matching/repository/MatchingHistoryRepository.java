@@ -27,6 +27,11 @@ public interface MatchingHistoryRepository extends JpaRepository<MatchingHistory
             + " WHERE mh.user1.id = :userId OR mh.user2.id = :userId")
     Long findOppositeUserIdById(@Param("userId") Long userId);
 
+    @Query("SELECT mh "
+            + " FROM MatchingHistory mh "
+            + " WHERE mh.user1.id = :userId OR mh.user2.id = :userId")
+    Optional<MatchingHistory> findMatchingHistoryByUserId(@Param("userId") Long userId);
+
 
 }
 

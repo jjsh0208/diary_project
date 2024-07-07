@@ -11,8 +11,8 @@
 }
 .entry-form {
     border-radius: 10px;
-    border: 1px solid #907a56;
-    background-color: #ebe0cf;
+    border: 1px solid rgb(230, 212, 182);
+    background-color: rgb(230, 212, 182);
     padding: 20px;
 }
 
@@ -63,7 +63,7 @@
     padding: 10px;
     font-size: 14px;
     color: #fff;
-    background-color: #ce7e61;
+    background-color: #f4a258;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -71,8 +71,16 @@
 }
 
 .submit-button:hover {
-    background-color: #d19d8a;
+    background-color: #da771e;
 }
+
+.submit-button:active{
+    transform: translateY(4px);
+    box-shadow: 0 0 0 1px #da771e inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
 .button-container {
     display: flex; /* Display buttons side by side */
     justify-content: flex-end; /* Align buttons to the right */
@@ -84,11 +92,25 @@
     padding: 10px;
     font-size: 14px;
     color: #070707;
-    background-color: #ffffff;
+    background-color: #c5c4c4;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
+}
+
+/*추가*/
+.form-group-horizontal {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filebox, .search-container {
+    flex: 1;
+    margin-right: 10px; /* 파일찾기와 서치창 사이 간격 조정 */
+    display: flex;
+    align-items: center;
 }
 
 
@@ -98,8 +120,11 @@
     padding: 0 10px;
     vertical-align: middle;
     border: 1px solid #dddddd;
-    width: 75%;
+    width: 70%;
     color: #999999;
+    flex-grow:1 ;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 
@@ -108,10 +133,14 @@
     padding: 10px 20px;
     color: #fff;
     vertical-align: middle;
-    background-color: #ce7e61;
+    background-color: #f4a258;
     cursor: pointer;
-    height: 20px;
+    height: 40px;
+    line-height: 20px;
+    white-space: nowrap;
     margin-left: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
 }
 
 .filebox input[type="file"] {
@@ -123,6 +152,10 @@
     border: 0;
 }
 
+.search-container {
+    display: flex;
+}
+
 .search-form {
     display: flex;
     align-items: center;
@@ -132,22 +165,24 @@
     flex: 1;
     height: 40px;
     border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
     padding: 0 12px;
     font-size: 14px;
+    border-radius: 4px;
 }
 
 .search-button {
     height: 40px;
     border: none;
-    background-color: #d9bcff;
+    background-color: #93dac9;
     color: #fff;
     padding: 0 16px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px;
     cursor: pointer;
+    margin-left: 10px;
+    box-sizing: border-box;
 }
 
 .search-button:hover {
-    background-color: #c296fd;
+    background-color: #21c59d;
 }
 

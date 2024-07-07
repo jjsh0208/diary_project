@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,9 +63,16 @@ public class DiaryController {
             model.addAttribute("matchingHistoryId", null);
         }
 
+        LocalDate today = LocalDate.now(); //오늘 날짜 게시글 작성 유무 체크용
 
+        boolean hasTodayDiary = diaries.stream() //가져온 게시글 중에 오늘날짜와 동일한 것이 있으면 true 없으면 false
+                .anyMatch(diary -> diary.getDate().equals(today));
+
+
+        System.out.println("너는 무엇이냐 : " + hasTodayDiary);
         model.addAttribute("diaryList" , diaries);
         model.addAttribute("user",user);
+        model.addAttribute("hasTodayDiary",hasTodayDiary);
 
         return "diary/index";
     }
