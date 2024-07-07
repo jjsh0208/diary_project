@@ -9,6 +9,57 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* 추가된 CSS */
+        .reaction-overlay {
+            position: absolute;
+            bottom: calc(100% + 10px); /* 이모티콘 버튼 위에 위치 */
+            display: none;
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .reaction-button-wrapper {
+            display: flex;
+            gap: 5px;
+        }
+        .reaction-overlay button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .reaction-overlay button:hover {
+            transform: scale(1.2);
+        }
+        .reaction-button-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .reaction-button-wrapper:hover .reaction-overlay {
+            display: block;
+        }
+        .emoji-button-container {
+            position: relative; /* 이모티콘 버튼의 상대적 위치 설정 */
+        }
+        .emoji-button-container button {
+            background-color: #f7c6a3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .emoji-button-container button:hover {
+            background-color: #edb897;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -70,6 +121,18 @@
             <div class="entry-content">
                 <p th:utext="${partner != null ? partner.content : '조금만 기다려주세요.'}"></p>
             </div>
+            <div class="reaction-buttons">
+                <div class="emoji-button-container">
+                    <button onclick="toggleEmojiOverlay(this)">이모티콘</button>
+                    <div class="reaction-overlay">
+                        <div class="reaction-button-wrapper">
+                            <button class="reaction-button" onclick="setReaction('😊', this)">😊</button>
+                            <button class="reaction-button" onclick="setReaction('😢', this)">😢</button>
+                            <button class="reaction-button" onclick="setReaction('❤️', this)">❤️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--음악 재생 추가-->
             <div class="wrap_music" th:if="${partner != null}" data-entry="2">
                 <input type="hidden" id="musicUrl2" th:value="${partner.music_url}">
@@ -97,6 +160,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleEmojiOverlay(button) {
+        const container = button.closest('.emoji-button-container');
+        const overlay = container.querySelector('.reaction-overlay');
+        overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function setReaction(emoji, button) {
+        const container = button.closest('.emoji-button-container');
+        const mainButton = container.querySelector('button');
+
+        if (mainButton.innerText === emoji) {
+            mainButton.innerText = '이모티콘';
+        } else {
+            mainButton.innerText = emoji;
+        }
+
+        hideReactions(container);
+    }
+
+    function hideReactions(container) {
+        const overlay = container.querySelector('.reaction-overlay');
+        overlay.style.display = 'none';
+    }
+</script>
 
 <script th:src="@{/js/music.js}"></script>
 <script>
