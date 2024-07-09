@@ -1,5 +1,4 @@
 let today = new Date();
-let thisDay = today.getDate();
 let year = today.getFullYear();
 let month = today.getMonth() + 1;
 let date = today.getDay();
@@ -126,5 +125,3 @@ function handleWeek(opt) {
 document.getElementById("year").innerHTML = year + " / ";
 document.getElementById("month").innerHTML = month;
 document.getElementById("title").innerHTML = month + " 월의 일기"
-// document.getElementById("date").innerHTML = weekDic2[date];
-

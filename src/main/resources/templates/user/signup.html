@@ -12,49 +12,54 @@
 <div class="container">
     <div class="header">
         <h1 class="title">회원가입</h1>
-        <p class="subtitle">회원가입을 통해 더 많은 혜택을 누리세요.</p>
+        <p class="subtitle">회원가입을 통해 더 많은 혜택을 누리세요!</p>
     </div>
     <form class="form" th:action="@{/user/register}" method="post">
         <div class="form-group">
             <div class="input-group">
                 <label for="email"><ion-icon name="mail-outline"></ion-icon> 이메일</label>
                 <input id="email" name="email" type="email" placeholder="example@email.com" required>
-                <p class="help-text">회원가입 시 사용할 이메일 주소를 입력해주세요.</p>
+                <p class="help-text">회원가입 시 사용할 이메일 주소를 입력해주세요</p>
             </div>
             <div class="input-group">
                 <label for="password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호</label>
                 <input id="password" name="password" type="password" required>
-                <p class="help-text">안전한 비밀번호를 설정해주세요.</p>
+                <p class="help-text">안전한 비밀번호를 설정해주세요</p>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호 확인</label>
+                <input id="confirm-password" name="confirmPassword" type="password" required>
+                <p class="help-text">비밀번호를 한 번 더 입력해주세요</p>
             </div>
         </div>
         <div class="form-group">
-            <div class="input-group">
-                <label for="confirm-password"><ion-icon name="lock-closed-outline"></ion-icon> 비밀번호 확인</label>
-                <input id="confirm-password" name="confirm-password" type="password" required>
-                <p class="help-text">비밀번호를 한 번 더 입력해주세요.</p>
-            </div>
             <div class="input-group">
                 <label for="name"><ion-icon name="person-outline"></ion-icon> 이름</label>
                 <input id="name" type="text" name="name" placeholder="홍길동" required>
-                <p class="help-text">실명으로 입력해주세요.</p>
+                <p class="help-text">당신을 뭐라고 불러드릴까요?</p>
             </div>
-        </div>
-        <div class="form-group">
+            <div class="input-group">
+                <label for="birthDate"><ion-icon name="person-outline"></ion-icon>생년월일</label>
+                <input id="birthDate" type="date" name="birthDate" required>
+                <p class="help-text">당신의 생일이 궁금해요</p>
+            </div>
             <div class="input-group">
                 <label for="phone"><ion-icon name="phone-portrait-outline"></ion-icon> 전화번호</label>
                 <input id="phone" type="tel" name="phone" placeholder="010-1234-5678" required>
-                <p class="help-text">연락 가능한 전화번호를 입력해주세요.</p>
+                <p class="help-text">연락 가능한 전화번호를 입력해주세요</p>
             </div>
             <div class="input-group">
                 <label for="sex"><ion-icon name="male-female-outline"></ion-icon> 성별</label>
                 <select id="sex" name="sex" required>
                     <option value="">선택해주세요</option>
-                    <option value="m">남성</option>
-                    <option value="f">여성</option>
+                    <option value="m">남자</option>
+                    <option value="f">여자</option>
                     <option value="o">기타</option>
                 </select>
-                <p class="help-text">성별을 선택해주세요.</p>
+                <p class="help-text">성별을 선택해주세요</p>
             </div>
+        </div>
+        <div class="form-group">
         </div>
         <div class="input-group">
             <label for="mbti"><ion-icon name="extension-puzzle-outline"></ion-icon> MBTI</label>
@@ -77,7 +82,7 @@
                 <option value="istj">ISTJ</option>
                 <option value="estj">ESTJ</option>
             </select>
-            <p class="help-text">MBTI 유형을 선택해주세요.</p>
+            <p class="help-text">당신의 MBTI 유형을 선택해주세요</p>
         </div>
         <button type="submit" class="submit-button">회원가입</button>
     </form>

@@ -1,10 +1,14 @@
 package org.example.diary.diary;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import org.example.diary.Security.SecurityUtil;
 import org.example.diary.exception.DataNotFoundException;
+import org.example.diary.matching.entity.MatchingHistory;
+import org.example.diary.matching.repository.MatchingHistoryRepository;
 import org.example.diary.user.User;
+import org.example.diary.user.UserRepository;
 import org.example.diary.user.UserService;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,19 +17,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
+
+import java.time.YearMonth;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class DiaryService {
+public class  DiaryService {
 
     private final DiaryRepository diaryRepository;
 
+    private final MatchingHistoryRepository matchingHistoryRepository;
+
+    private final UserRepository userRepository;
+
     private final UserService userService;
+
+    private final HttpSession session;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
@@ -42,7 +55,12 @@ public class DiaryService {
                 uploadDirFile.mkdirs();
             }
 
-            filePath = uploadDirFile.getAbsolutePath() + File.separator + imgFile.getOriginalFilename();
+            // 파일 이름에 타임스탬프 추가하여 고유하게 만듦
+            String originalFileName = imgFile.getOriginalFilename();
+            String newFileName = generateUniqueFileName(originalFileName);
+
+
+            filePath = uploadDirFile.getAbsolutePath() + File.separator + newFileName;
 
             imgFile.transferTo(new File(filePath));
 
@@ -63,20 +81,48 @@ public class DiaryService {
         create(title,content,filePath,music_url);
     }
 
+    private String generateUniqueFileName(String originalFileName) {
+        String extension = "";
+        String fileNameWithoutExtension = originalFileName;
+
+        //확장자 분리
+        int dotIndex = originalFileName.lastIndexOf(".");
+        if (dotIndex != -1) {
+            //확장자 추출
+            extension = originalFileName.substring(dotIndex); 
+            //확장자를 제외한 파일명 추출
+            fileNameWithoutExtension = originalFileName.substring(0, dotIndex); 
+        }
+
+        // 타임스탬프 추가
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+
+        // 파일명에 타임스탬프 추가하여 고유한 파일명 생성
+        return fileNameWithoutExtension  + "_t" + timeStamp + extension;
+    }
+
+
     private void create(String subject, String content ,String imgPath,String music_url){
         User writer = userService.getUser(SecurityUtil.getCurrentUsername());
+        LocalDate date = LocalDate.now();
 
-        Diary diary = Diary.builder()
-                .writer(writer)
-                .subject(subject)
-                .content(content)
-                .imgFile(imgPath)
-                .music_url(music_url)
-                .date(new Date())
-                .build();
+        Optional<MatchingHistory> matchingHistory = matchingHistoryRepository.findMatchingHistoryByUserId(writer.getId());
 
-        diaryRepository.save(diary);
+        if (matchingHistory.isPresent()){
+            Diary diary = Diary.builder()
+                    .writer(writer)
+                    .matchingHistory(matchingHistory.get())
+                    .subject(subject)
+                    .content(content)
+                    .imgFile(imgPath)
+                    .music_url(music_url)
+                    .date(date)
+                    .build();
+            diaryRepository.save(diary);
+        }
+
     }
+
 
     public Diary getDiary(Long id) {
         Optional<Diary> diary = this.diaryRepository.findById(id);
@@ -87,19 +133,24 @@ public class DiaryService {
         }
     }
 
-
-    public Diary getPartnerDiary(Long id,Date date) {
-         Optional<Diary> diary = diaryRepository.findByIdAndDate(id,date);
-         if (diary.isPresent()){
-             return diary.get();
-         }else{
-             throw  new DataNotFoundException("partnerDiary Not Fount");
-         }
+    public Diary getPartnerDiary(Long userId, LocalDate date) {
+        //글을 보는 유저의 id와 오늘 diary 작성일자
+        Long oppositeUserId = matchingHistoryRepository.findOppositeUserIdById(userId);
+        if (oppositeUserId != null) {
+            Optional<User> partner = userRepository.findById(oppositeUserId);
+            if (partner.isPresent()) {
+                return diaryRepository.findByWriterAndDate(partner.get(), date);
+            }
+        }
+        return null;
     }
 
+    public List<Diary> getMonthlyDiary(Long id) {
+        YearMonth currentMonth = YearMonth.now();
+        LocalDate startDate = currentMonth.atDay(1);
+        LocalDate endDate = currentMonth.atEndOfMonth();
 
-    public List<Diary> getList() {
-        return diaryRepository.findAll();
+        return diaryRepository.findByWriter_IdAndDateBetween(id,startDate,endDate);
     }
 
 }

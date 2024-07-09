@@ -13,12 +13,12 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{layout/calender :: calendarFragment}"></div>
+    <div th:replace="~{layout/calender :: calendarFragment(user=${user}, matchingHistoryId=${matchingHistoryId})}"></div>
     <div class="container-right">
         <div class="header">
             <h1 class="title" id="title"></h1>
-
-            <button class="btn-new-entry"  onclick="location.href='/diary/write'" >오늘의 일기 쓰기</button>
+            <button class="btn-new-entry" th:if="${!hasTodayDiary and user.isMatched == 1}" onclick="location.href='/diary/write'">오늘의 일기 쓰기</button>
+<!--            <button class="btn-new-entry" th:if="${!hasTodayDiary}" onclick="location.href='/diary/write'">오늘의 일기 쓰기</button>-->
         </div>
         <div class="entries">
             <div class="entry-list" th:each="diary : ${diaryList} " th:onclick="'window.location.href=\'/diary/show/' + ${diary.id} + '\';'">

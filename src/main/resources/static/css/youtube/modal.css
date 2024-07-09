@@ -32,11 +32,11 @@
     cursor: pointer;
 }
 
-.dongle-regular {
-    font-family: "Dongle", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
+/*.dongle-regular {*/
+/*    font-family: "Dongle", sans-serif;*/
+/*    font-weight: 400;*/
+/*    font-style: normal;*/
+/*}*/
 
 .confirm-box {
     position: fixed;
@@ -44,7 +44,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
-    background-color: #fbf5df;
+    background-color: #fef3e3;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -53,12 +53,12 @@
     text-align: center;
 }
 
-.dongle-regular {
-    font-family: "Dongle", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;
-}
+/*.dongle-regular {*/
+/*    font-family: "Dongle", sans-serif;*/
+/*    font-weight: 400;*/
+/*    font-style: normal;*/
+/*    font-size: 20px;*/
+/*}*/
 
 .confirm-box p {
     font-size: 16px;
@@ -74,25 +74,29 @@
     outline: none;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Dongle", sans-serif;
+    /*font-family: "Dongle", sans-serif;*/
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    line-height:20px;
 }
 
 .confirm-box .confirm {
-    background-color: #ffe697;
+    background-color: #f4a258;
     color: white;
 }
 
 .confirm-box .confirm:hover {
-    background-color: #FAC51FFf;
+    background-color: #da771e;
 }
 
 .confirm-box .cancel {
-    background-color: #91b6ed;
+    background-color: #93dac9;
     color: white;
 }
 
 .confirm-box .cancel:hover {
-    background-color: #5b9bfb;
+    background-color: #21c59d;
 }
 
 .overlay {
@@ -112,7 +116,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #e8e6df;
+    background-color: rgb(200, 187, 166);
 }
 
 .container {
@@ -137,8 +141,9 @@ body {
     overflow-y: auto;
 }
 
+/*결과 동영상 작은 세개 창*/
 .result-item {
-    background-color: #fdfaee;
+    background-color: #fcf3e3;
     padding: 16px;
     border-radius: 4px;
     margin-bottom: 16px;

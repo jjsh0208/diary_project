@@ -18,4 +18,14 @@ public class SecurityUtil {
         return null;
     }
 
+    public static Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetail) {
+                return ((UserDetail) principal).getUserId(); // 사용자의 ID 반환
+            }
+        }
+        return null;
+    }
 }

@@ -4,7 +4,7 @@
     top: 0;
     width: 400px;
     height: 100%;
-    background-color: #ebb783;
+    background-color: #f4a258;
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 10;
@@ -39,7 +39,7 @@
 }
 
 .menu a:hover {
-    background-color: #575757;
+    background-color: #da771e;
 }
 
 .toggle-button {

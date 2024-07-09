@@ -3,10 +3,10 @@ package org.example.diary.diary;
 import jakarta.persistence.*;
 import lombok.*;
 
+import org.example.diary.matching.entity.MatchingHistory;
 import org.example.diary.user.User;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -37,6 +37,11 @@ public class Diary {
     private String music_url;
 
     @Column
-    private Date date;
+    private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "matching_history_id")
+    private MatchingHistory matchingHistory;
+
 
 }
