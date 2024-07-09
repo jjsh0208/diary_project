@@ -1,4 +1,4 @@
-# :shopping_cart: TheBlues 
+# :shopping_cart: 익명교환일기 (너의 하루는)
 Spring Boot / Shopping Mall Project<br>
 #### Java 2팀
 * 전승현
