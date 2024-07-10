@@ -1,5 +1,5 @@
 # 📖 익명교환일기 (너의 하루는)
-Spring Boot / Project-X 2기 <br>
+Spring Boot / Project-X (대구) 2기 <br>
 #### Java 2팀
 * 전승현 (일기 작성 및 읽기)
 * 강수빈 (YouTube Data API)
