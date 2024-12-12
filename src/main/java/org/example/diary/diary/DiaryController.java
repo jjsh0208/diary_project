@@ -68,8 +68,6 @@ public class DiaryController {
         boolean hasTodayDiary = diaries.stream() //가져온 게시글 중에 오늘날짜와 동일한 것이 있으면 true 없으면 false
                 .anyMatch(diary -> diary.getDate().equals(today));
 
-
-        System.out.println("너는 무엇이냐 : " + hasTodayDiary);
         model.addAttribute("diaryList" , diaries);
         model.addAttribute("user",user);
         model.addAttribute("hasTodayDiary",hasTodayDiary);
